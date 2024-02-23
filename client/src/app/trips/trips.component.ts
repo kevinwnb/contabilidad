@@ -6,6 +6,7 @@ import { Component, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
   styleUrls: ['./trips.component.scss']
 })
 export class TripsComponent {
+  modalDate: Date;
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
   weekday = this.weekdayOfFirstDay();
   daysBeforeCurrent = Array.from({ length: this.weekday - 1 }, (_, i) => i + 1);
@@ -14,6 +15,8 @@ export class TripsComponent {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   currentMonth = this.monthNames[new Date().getMonth()];
+  monthDisplayed = new Date().getMonth();
+  yearDisplayed = new Date().getFullYear();
 
   daysInThisMonth() {
     var now = new Date();
@@ -28,5 +31,9 @@ export class TripsComponent {
   daysInNextMonth() {
     var now = new Date();
     return new Date(now.getFullYear(), now.getMonth() + 2, 0).getDate();
+  }
+
+  setModalDate(event: any) {
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, event.target.id);
   }
 }

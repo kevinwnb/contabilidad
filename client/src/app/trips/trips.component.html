@@ -1,3 +1,27 @@
+<div #modal id="modal" class="modal fade">
+  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{modalDate | date: 'dd/MM/yyyy'}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" id="date">
+            <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button class="btn btn-warning" type="submit">Save changes</button>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="calendar">
   <h2>{{currentMonth}}</h2>
   <div class="calendar-container">
@@ -8,7 +32,7 @@
       <h4>{{day}}</h4>
       {{weekday}}
       <i>80€</i>
-      <button class="add">Añadir</button>
+      <button type="button" class="add btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">Open</button>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 
