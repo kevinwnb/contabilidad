@@ -18,13 +18,17 @@ export class TripsComponent {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   currentMonth = this.monthNames[(new Date()).getMonth()];
-  monthDisplayed = (new Date()).getMonth();
+  monthDisplayed = (new Date()).getMonth() + 1;
   yearDisplayed = (new Date()).getFullYear();
   eod = 0;
 
   //entry form
   concept = "";
   amount = "";
+
+  constructor() {
+    this.populateEntries();
+  }
 
   daysInThisMonth() {
     var now = new Date();
@@ -56,9 +60,7 @@ export class TripsComponent {
   async addEntry(event: Event) {
     event.preventDefault();
 
-    console.log(this.concept)
-
-    var response = await fetch('/api/trip/create', {
+    var response = await fetch('/api/entry', {
       method: 'POST',
       headers: {
         'Authorization': 'Bearer ' + this.getCookie('token'),
@@ -80,7 +82,7 @@ export class TripsComponent {
   }
 
   async populateEntries() {
-    var response = await fetch('/api/trip/all', {
+    var response = await fetch('/api/entry/' + this.monthDisplayed + '/' + this.yearDisplayed + '/all', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + this.getCookie('token'),
@@ -93,6 +95,7 @@ export class TripsComponent {
       return this.error = data.error
 
     this.entries = data.entries
+    console.log(this.entries)
   }
 
   getCookie(cname: string): string {

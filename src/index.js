@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken")
 const mysql = require("mysql2")
 var cookieParser = require("cookie-parser")
 const accountRouter = require("./routes/account.router")
-const tripRouter = require("./routes/trip.router")
+const entryRouter = require("./routes/entry.router")
 const fs = require("fs")
 const refuelRouter = require("./routes/refuel.router")
 
@@ -37,8 +37,8 @@ app.use("/", express.static(path.join(__dirname, "client", "dist", "client")))
 // Account
 app.use("/api", accountRouter)
 
-// Trips
-app.use("/api/trip", auth, tripRouter)
+// Entries
+app.use("/api/entry", auth, entryRouter)
 
 // Refuels
 app.use("/api/refuel", auth, refuelRouter)
