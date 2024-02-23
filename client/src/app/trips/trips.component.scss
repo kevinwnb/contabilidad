@@ -16,6 +16,10 @@ div.calendar {
         cursor: pointer;
       }
 
+      &:not(.current) {
+        background-color: gray;
+      }
+
       > b {
         display: flex;
         margin: 0 auto;
@@ -61,8 +65,22 @@ div.calendar {
 
 .modal input {
   display: block;
+  width: 100%;
+  max-width: 200px;
   margin: 0 auto;
   padding: 5px;
+}
+
+.modal form {
+  width: 200px;
+  margin: 0 auto;
+}
+
+button.button-success {
+  padding: 10px;
+  color: white;
+  background-color: green;
+  width: 100%;
 }
 
 div.loading {

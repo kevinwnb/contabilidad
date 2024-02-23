@@ -6,13 +6,24 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
+        <p class="alert alert-danger d-flex"><span>Gastos de envío</span> <b class="ms-auto">-10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
+        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
         <form>
           <div class="mb-3">
-            <label for="date" class="form-label">Date</label>
-            <input type="date" id="date">
-            <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button class="btn btn-warning" type="submit">Save changes</button>
+            <label for="amount" class="form-label">Cantidad €</label>
+            <input type="text" id="amount" placeholder="100">
           </div>
+          <div class="mb-3">
+            <label for="concept" class="form-label">Concepto</label>
+            <input type="text" id="concept" placeholder="Concepto">
+          </div>
+          <button class="button-success" type="submit">+ Añadir</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -28,7 +39,8 @@
     <div class="day" *ngFor="let day of daysBeforeCurrent">
 
     </div>
-    <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate(day)">
+    <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
+      (click)="setModalDate(day)">
       <h4>{{day}}</h4><small class="ms-2">4 entradas</small>
       <b class="eod" [class.green]="eod > 0" [class.neutral]="eod == 0" [class.red]="eod < 0">{{eod}}€</b>
     </div>
