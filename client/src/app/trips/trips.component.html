@@ -1,4 +1,5 @@
 <div class="calendar">
+  <h2>{{currentMonth}}</h2>
   <div class="calendar-container">
     <div class="day" *ngFor="let day of daysBeforeCurrent">
 
@@ -7,6 +8,7 @@
       <h4>{{day}}</h4>
       {{weekday}}
       <i>80€</i>
+      <button class="add">Añadir</button>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 

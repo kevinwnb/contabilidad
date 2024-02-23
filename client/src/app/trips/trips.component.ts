@@ -10,10 +10,14 @@ export class TripsComponent {
   weekday = this.weekdayOfFirstDay();
   daysBeforeCurrent = Array.from({ length: this.weekday - 1 }, (_, i) => i + 1);
   daysAfterCurrent = Array(7 - this.weekday)
+  monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+    "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+  ];
+  currentMonth = this.monthNames[new Date().getMonth()];
 
   daysInThisMonth() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth()+1, 0).getDate();
+    return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
   }
 
   weekdayOfFirstDay() {
@@ -23,6 +27,6 @@ export class TripsComponent {
 
   daysInNextMonth() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth()+2, 0).getDate();
+    return new Date(now.getFullYear(), now.getMonth() + 2, 0).getDate();
   }
 }
