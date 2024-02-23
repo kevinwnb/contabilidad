@@ -1,34 +1,14 @@
-div.pre-end-of-day {
+div.calendar {
+  > div.calendar-container {
     display: flex;
-    justify-content: center;
-}
+    flex-wrap: wrap;
 
-div.pre-end-of-day>button {
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 15px 32px;
-    margin: 0 auto;
-    display: flex;
-    font-size: 120%;
-    border-radius: 10px;
-}
-
-div.pre-end-of-day>button:active {
-    transform: scale(0.98);
-}
-
-div.pre-end-of-day>button[disabled] {
-    background-color: gray;
-    color: #c0c0c0;
-}
-
-table {
-    margin-top: 50px;
-}
-
-table tr td, table tr th[scope="row"] {
-    vertical-align: middle;
+    div.day {
+      width: 14.285%;
+      height: 100px;
+      outline: 1px solid black;
+    }
+  }
 }
 
 div.loading {

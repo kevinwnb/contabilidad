@@ -1,89 +1,15 @@
-<div #modal class="modal fade" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <form (submit)="onSubmit($event)" class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Add trip</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div class="add-trip-form">
-                    <p class="alert alert-danger" *ngIf="error">{{error}}</p>
-                    <input type="hidden" [(ngModel)]="tripModel.id" name="id">
-                    <div class="mb-3">
-                        <label for="startLocation">Start location</label>
-                        <input autofocus [(ngModel)]="tripModel.startLocation" type="text" class="form-control"
-                            id="startLocation" name="startLocation">
-                    </div>
-                    <div class="mb-3">
-                        <label for="endLocation">End location</label>
-                        <input [(ngModel)]="tripModel.endLocation" type="text" class="form-control" id="endLocation"
-                            name="endLocation">
-                    </div>
-                    <div class="mb-3">
-                        <label for="date">Start date</label>
-                        <input [ngModel]="tripModel.startDate | date:'yyyy-MM-dd'"
-                            (ngModelChange)="tripModel.startDate = $event" type="date" class="form-control" id="date"
-                            name="startDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="date">End date</label>
-                        <input [ngModel]="tripModel.endDate | date:'yyyy-MM-dd'"
-                            (ngModelChange)="tripModel.endDate = $event" type="date" class="form-control" id="date"
-                            name="endDate">
-                    </div>
-                    <div class="mb-3">
-                        <label for="miles">Miles</label>
-                        <input [(ngModel)]="tripModel.miles" type="text" class="form-control" id="miles" name="miles">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button #closeButton type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button *ngIf="tripModel.id == 0" class="btn btn-success" type="submit">Add trip</button>
-                <button *ngIf="tripModel.id > 0" class="btn btn-warning" type="submit">Save changes</button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<div class="pre-end-of-day">
-    <button (click)="onAddTripBtnClick($event)" [disabled]="!isAvailable" data-bs-toggle="modal"
-        data-bs-target=".modal">Add
-        trip</button>
-</div>
-
-<div class="loading" *ngIf="isLoading">
-    <div class="spinner">
+<div class="calendar">
+  <div class="calendar-container">
+    <div class="day" *ngFor="let day of daysBeforeCurrent">
 
     </div>
-</div>
+    <div class="day" *ngFor="let day of days">
+      <h4>{{day}}</h4>
+      {{weekday}}
+      <i>80€</i>
+    </div>
+    <div class="day" *ngFor="let day of daysAfterCurrent">
 
-<table class="table" *ngIf="!isLoading">
-    <thead>
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Start location</th>
-            <th scope="col">End location</th>
-            <th scope="col">Start date</th>
-            <th scope="col">End date</th>
-            <th scope="col">Miles</th>
-            <th scope="col">Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let trip of trips; let i = index">
-            <th scope="row">{{trip.id}}</th>
-            <td>{{trip.startLocation || '-'}}</td>
-            <td>{{trip.endLocation || '-'}}</td>
-            <td>{{trip.startDate | date:'dd-MM-yyyy'}}</td>
-            <td>{{trip.endDate | date:'dd-MM-yyyy'}}</td>
-            <td>{{trip.miles}}</td>
-            <td>
-                <button (click)="onEditBtnClick($event, trip)" data-bs-toggle="modal" data-bs-target=".modal"
-                    class="btn btn-warning me-2"><i class="fa-solid fa-pencil"></i></button>
-                <button (dblclick)="onDelete($event, trip.id)" class="btn btn-danger"><i
-                        class="fa-solid fa-trash"></i></button>
-            </td>
-        </tr>
-    </tbody>
-</table>
+    </div>
+  </div>
+</div>

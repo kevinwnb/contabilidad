@@ -40,7 +40,7 @@ export class FinancesComponent {
       series: [
         {
           name: "Gross",
-          data: [76, 85, 101, 98, 87, 105, 91, 114, 94]
+          data: [76, -85, 101, 98, 87, 105, 91, 114, 94]
         },
         {
           name: "Net",
