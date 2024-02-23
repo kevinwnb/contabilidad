@@ -28,11 +28,11 @@
     <div class="day" *ngFor="let day of daysBeforeCurrent">
 
     </div>
-    <div class="day" *ngFor="let day of days">
+    <div class="day" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">
       <h4>{{day}}</h4>
       {{weekday}}
       <i>80€</i>
-      <button type="button" class="add btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">Open</button>
+      <button type="button" class="add" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">Open</button>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 
