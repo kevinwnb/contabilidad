@@ -1,5 +1,5 @@
-import { Request, Response } from "express"
-import mysql from "mysql2"
+const { Request, Response } = require("express")
+const mysql = require("mysql2")
 
 module.exports = {
     create: (req, res) => {
@@ -9,9 +9,9 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         })
 
@@ -60,9 +60,9 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         })
 
@@ -112,9 +112,9 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         })
 
@@ -137,9 +137,9 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         })
 

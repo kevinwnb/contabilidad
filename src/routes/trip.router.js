@@ -1,4 +1,4 @@
-import { Router } from "express"
+const { Router } = require("express")
 const tripController = require("../controllers/trip.controller")
 
 const router = Router()

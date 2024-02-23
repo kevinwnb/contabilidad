@@ -1,4 +1,4 @@
-import {Router} from 'express'
+const {Router} = require('express')
 const router = Router()
 const refuelController = require('../controllers/refuel.controller')
 

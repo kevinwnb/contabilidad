@@ -1,4 +1,4 @@
-import { Request, Response } from "express"
+const { Request, Response } = require("express")
 const mysql = require("mysql2")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcrypt")
@@ -12,15 +12,15 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         });
 
         con.connect(function (err) {
             if (err)
-                return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later" + process.env.DATABASE })
 
             con.query("SELECT id, email, password FROM users WHERE email = ?", req.body.email, function (err, result) {
                 if (err)
@@ -32,8 +32,12 @@ module.exports = {
                     if (err)
                         return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
 
-                    if (!result)
+                    console.log(req.body)
+
+                    if (!result){
+                        
                         return res.json({ success: false, error: "Invalid username or password" })
+                    }
 
                     let token = jwt.sign({ id: user.id, email: user.email }, process.env.PRIVATE_KEY, { expiresIn: "1h" })
                     res.cookie("token", token)
@@ -66,9 +70,9 @@ module.exports = {
         var con = mysql.createConnection({
             host: "localhost",
             port: 3306,
-            user: "root",
-            password: "0000",
-            database: "easy_trucking",
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
             multipleStatements: true
         });
 

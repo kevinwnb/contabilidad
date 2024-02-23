@@ -44,7 +44,7 @@ export class LoginComponent {
       const data = await response.json()
 
       if (!data.success) {
-        this.errorMsg = "Invalid username or password"
+        this.errorMsg = data.error
         this.isLoading = false
       }
       else if (data.success) {
