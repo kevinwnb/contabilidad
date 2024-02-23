@@ -13,15 +13,14 @@
         <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
         <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
         <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
-        <p class="alert alert-success d-flex"><span>Ingresos</span> <b class="ms-auto">10€</b></p>
-        <form>
+        <form (submit)="addEntry($event)">
           <div class="mb-3">
             <label for="amount" class="form-label">Cantidad €</label>
-            <input type="text" id="amount" placeholder="100">
+            <input type="text" [value]="amount" (change)="changeAmount($event)" id="amount" placeholder="100">
           </div>
           <div class="mb-3">
             <label for="concept" class="form-label">Concepto</label>
-            <input type="text" id="concept" placeholder="Concepto">
+            <input type="text" id="concept" [value]="concept" (change)="changeConcept($event)" placeholder="Concepto">
           </div>
           <button class="button-success" type="submit">+ Añadir</button>
         </form>
