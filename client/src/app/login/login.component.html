@@ -1,0 +1,18 @@
+<mat-progress-bar *ngIf="isLoading" style="position: absolute;" mode="indeterminate"></mat-progress-bar>
+<div class="pre-login">
+    <div class="login">
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <p class="errorMsg" *ngIf="errorMsg">{{errorMsg}}</p>
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput type="text" id="email" formControlName="email">
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Password</mat-label>
+                <input matInput type="password" id="password" formControlName="password">
+            </mat-form-field>
+            <button color="accent" mat-flat-button type="submit">Login</button>
+            <a id="registerBtn" routerLink="/create-account" color="primary" mat-flat-button>Create account</a>
+        </form>
+    </div>
+</div>

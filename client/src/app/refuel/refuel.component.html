@@ -1,0 +1,66 @@
+<p class="alert alert-danger" *ngIf="error">{{error}}</p>
+<!-- <table *ngIf="trips && trips.length > 0" class="table">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">From</th>
+            <th scope="col">To</th>
+            <th scope="col">Start date</th>
+            <th scope="col">End date</th>
+            <th scope="col">Miles</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let trip of trips">
+            <th scope="row">{{trip.id}}</th>
+            <td>{{trip.startLocation}}</td>
+            <td>{{trip.endLocation}}</td>
+            <td>{{trip.startDate}}</td>
+            <td>{{trip.endDate}}</td>
+            <td>{{trip.miles}}</td>
+            <td>
+                <button class="btn btn-success">Add refuel</button>
+            </td>
+        </tr>
+    </tbody>
+</table> -->
+
+<div class="accordion" id="trips">
+    <div *ngFor="let trip of trips" class="accordion-item">
+        <h2 class="accordion-header m-0" [id]="'heading' + trip.id">
+            <button (click)="getRefuels(trip.id)" class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                [attr.data-bs-target]="'#collapse' + trip.id" aria-expanded="false"
+                [attr.aria-controls]="'collapse' + trip.id">
+                <span>
+                    Trip from <b>{{trip.startLocation}}</b> to <b>{{trip.endLocation}}</b> started on
+                    <b>{{trip.startDate}}</b>
+                </span>
+            </button>
+        </h2>
+        <div [id]="'collapse' + trip.id" class="accordion-collapse collapse"
+            [attr.aria-labelledby]="'heading' + trip.id" data-bs-parent="#trips">
+            <div class="accordion-body">
+                <p class="alert alert-info" *ngIf="refuels && refuels.length === 0">No refuels</p>
+                <table *ngIf="refuels && refuels.length > 0" class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Gallons tanked</th>
+                            <th scope="col">Total price paid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let refuel of trip.refuels">
+                            <th scope="row">{{refuel.id}}</th>
+                            <td>{{refuel.date}}</td>
+                            <td>{{refuel.gallons}}</td>
+                            <td>{{refuel.price}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

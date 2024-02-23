@@ -1,0 +1,58 @@
+nav {
+    width: 70px;
+    height: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    position: fixed;
+    padding-top: 50px;
+    border-right: 1px solid #c0c0c0;
+}
+
+nav a,
+nav button {
+    color: #000;
+    margin: 5px;
+    text-decoration: none;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.15);
+    display: flex;
+    align-items: center;
+    aspect-ratio: 1/1;
+    justify-content: center;
+}
+
+nav a>i,
+nav button>i {
+    display: inline-flex;
+    font-size: 120%;
+}
+
+nav a:active,
+nav button:active {
+    transform: scale(0.98);
+}
+
+nav a:hover,
+nav button:hover {
+    background-color: rgba($color: #3c3c3c, $alpha: 0.1);
+}
+
+nav a.active {
+    color: white;
+    background-color: #0080ff;
+    // background-color: rgba(255, 255, 255, 1);
+}
+
+nav button {
+    background-color: white;
+    color: firebrick;
+    cursor: pointer;
+    border: none;
+}
+
+nav button:hover {
+    background-color: rgba($color: firebrick, $alpha: 0.2);
+    color: firebrick;
+}

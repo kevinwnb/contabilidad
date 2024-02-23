@@ -1,0 +1,38 @@
+nav {
+    position: absolute;
+    width: 100%;
+}
+
+.pre-create-account {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+}
+
+.pre-create-account form#createAccountForm {
+    width: 100%;
+    max-width: 400px;
+    padding: 100px 20px;
+}
+
+.pre-create-account div.success {
+    display: flex;
+    flex-direction: column;
+}
+
+.pre-create-account div.success div.check-container {
+    width: 200px;
+    height: 200px;
+    background-color: green;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 200px;
+}
+
+.pre-create-account div.success i {
+    font-size: 100px;
+}

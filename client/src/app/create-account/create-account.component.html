@@ -1,0 +1,38 @@
+<nav class="navbar bg-dark">
+    <div class="container-fluid">
+      <span class="navbar-brand mb-0 h1 text-light">Easy Trucking</span>
+    </div>
+  </nav>
+<div class="pre-create-account">
+    <div *ngIf="success" class="success">
+        <div class="check-container">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <a routerLink="/login" class="btn btn-link">Login</a>
+    </div>
+    <form *ngIf="!success" (submit)="onSubmit($event)" id="createAccountForm">
+        <h2 class="text-center mb-5">Create account</h2>
+        <P class="alert alert-danger" *ngIf="error">{{error}}</P>
+        <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input autofocus type="text" class="form-control" id="firstName" [(ngModel)]="userModel.firstName" name="firstName">
+            <small class="text-danger mt-1 d-inline-flex" *ngIf="error && !userModel.firstName">First name is required</small>
+        </div>
+        <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input type="text" class="form-control" id="lastName" [(ngModel)]="userModel.lastName" name="lastName">
+            <small class="text-danger mt-1 d-inline-flex" *ngIf="error && !userModel.lastName">Last name is required</small>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" [(ngModel)]="userModel.email" name="email">
+            <small class="text-danger mt-1 d-inline-flex" *ngIf="error && !userModel.email">Email is required</small>
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="password" [(ngModel)]="userModel.password" name="password">
+            <small class="text-danger mt-1 d-inline-flex" *ngIf="error && !userModel.password">Password is required</small>
+        </div>
+        <button type="submit" class="btn btn-success w-100 mt-4">Create account</button>
+    </form>
+</div>

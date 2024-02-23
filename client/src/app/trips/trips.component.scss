@@ -1,0 +1,68 @@
+div.pre-end-of-day {
+    display: flex;
+    justify-content: center;
+}
+
+div.pre-end-of-day>button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    margin: 0 auto;
+    display: flex;
+    font-size: 120%;
+    border-radius: 10px;
+}
+
+div.pre-end-of-day>button:active {
+    transform: scale(0.98);
+}
+
+div.pre-end-of-day>button[disabled] {
+    background-color: gray;
+    color: #c0c0c0;
+}
+
+table {
+    margin-top: 50px;
+}
+
+table tr td, table tr th[scope="row"] {
+    vertical-align: middle;
+}
+
+div.loading {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+div.loading div.spinner {
+    border: 10px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 10px solid #3c3c3c;
+    width: 120px;
+    height: 120px;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
