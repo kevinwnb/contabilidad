@@ -11,7 +11,38 @@ div.calendar {
       position: relative;
       overflow: hidden;
       margin: 0.5px;
-      cursor: pointer;
+
+      &.current {
+        cursor: pointer;
+      }
+
+      > b {
+        display: flex;
+        margin: 0 auto;
+        justify-content: center;
+      }
+
+      > b.green {
+        color: limegreen;
+      }
+
+      > b.red {
+        color: red;
+      }
+
+      > b.neutral {
+        color: gray;
+      }
+
+      > h4 {
+        color: black;
+        background-color: silver;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1/1;
+        height: 25px;
+      }
 
       >button.add {
         width: 100%;

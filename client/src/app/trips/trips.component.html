@@ -28,11 +28,9 @@
     <div class="day" *ngFor="let day of daysBeforeCurrent">
 
     </div>
-    <div class="day" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">
-      <h4>{{day}}</h4>
-      {{weekday}}
-      <i>80€</i>
-      <button type="button" class="add" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate($event)">Open</button>
+    <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day" (click)="setModalDate(day)">
+      <h4>{{day}}</h4><small class="ms-2">4 entradas</small>
+      <b class="eod" [class.green]="eod > 0" [class.neutral]="eod == 0" [class.red]="eod < 0">{{eod}}€</b>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 

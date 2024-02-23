@@ -14,26 +14,27 @@ export class TripsComponent {
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
-  currentMonth = this.monthNames[new Date().getMonth()];
-  monthDisplayed = new Date().getMonth();
-  yearDisplayed = new Date().getFullYear();
+  currentMonth = this.monthNames[(new Date()).getMonth()];
+  monthDisplayed = (new Date()).getMonth();
+  yearDisplayed = (new Date()).getFullYear();
+  eod = 0;
 
   daysInThisMonth() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+    return (new Date(now.getFullYear(), now.getMonth() + 1, 0)).getDate();
   }
 
   weekdayOfFirstDay() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth(), 1).getDay();
+    return (new Date(now.getFullYear(), now.getMonth(), 1)).getDay();
   }
 
   daysInNextMonth() {
     var now = new Date();
-    return new Date(now.getFullYear(), now.getMonth() + 2, 0).getDate();
+    return (new Date(now.getFullYear(), now.getMonth() + 2, 0)).getDate();
   }
 
-  setModalDate(event: any) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, event.target.id);
+  setModalDate(day: number) {
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, day);
   }
 }
