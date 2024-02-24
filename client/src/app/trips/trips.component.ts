@@ -46,8 +46,7 @@ export class TripsComponent {
   }
 
   setModalDate(day: number) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day, 0, 0, 0, 0);
-    this.error = this.modalDate.toUTCString()
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day, 1, 0, 0, 0);
   }
 
   changeConcept(event: Event) {
@@ -60,8 +59,6 @@ export class TripsComponent {
 
   async addEntry(event: Event) {
     event.preventDefault();
-
-    this.error = this.modalDate.toISOString()
 
     var response = await fetch('/api/entry', {
       method: 'POST',
@@ -104,6 +101,20 @@ export class TripsComponent {
   filterEntriesByDay(entries: any[]) {
     let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate());
     return entriesByDay;
+  }
+
+  getEntriesCount(day: number) {
+    return this.entries.filter(entry => new Date(entry.fecha).getDate() == day).length
+  }
+
+  getEntriesSum(day: number) {
+    let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == day);
+    let sum = 0;
+    entriesByDay.forEach(entry => {
+      sum += entry.cantidad;
+    });
+
+    return sum;
   }
 
   getCookie(cname: string): string {
