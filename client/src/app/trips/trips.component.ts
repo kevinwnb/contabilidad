@@ -46,8 +46,8 @@ export class TripsComponent {
   }
 
   setModalDate(day: number) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day + 1, 0, 0, 0, 0);
-    this.error = this.modalDate.toISOString()
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day, 0, 0, 0, 0);
+    this.error = this.modalDate.toUTCString()
   }
 
   changeConcept(event: Event) {
