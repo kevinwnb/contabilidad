@@ -128,7 +128,7 @@ export class TripsComponent {
       sum += entry.cantidad;
     });
 
-    return sum;
+    return Math.round((sum + Number.EPSILON) * 100) / 100;
   }
 
   calculateTotal() {
