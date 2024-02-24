@@ -20,7 +20,7 @@ module.exports = {
             if (err)
                 return res.json({ success: false, error: "An error ocurred on our end, please try again later1"+err.message })
 
-            con.query("SELECT * FROM entradas WHERE MONTH(fecha) = MONTH(?)", req.params.month, function (err, result) {
+            con.query("SELECT * FROM entradas WHERE MONTH(fecha) = ?", req.params.month, function (err, result) {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later2" })
 

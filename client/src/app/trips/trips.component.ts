@@ -18,7 +18,7 @@ export class TripsComponent {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   currentMonth = this.monthNames[(new Date()).getMonth()];
-  monthDisplayed = (new Date()).getMonth() + 1;
+  monthDisplayed = (new Date()).getMonth();
   yearDisplayed = (new Date()).getFullYear();
   eod = 0;
 
@@ -45,8 +45,8 @@ export class TripsComponent {
     return (new Date(now.getFullYear(), now.getMonth() + 2, 0)).getDate();
   }
 
-  setModalDate(day: number) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, day);
+  setModalDate(day: any) {
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, Number(day));
   }
 
   changeConcept(event: Event) {
@@ -69,7 +69,7 @@ export class TripsComponent {
       body: JSON.stringify({
         concept: this.concept,
         amount: this.amount,
-        date: this.modalDate
+        date: this.modalDate.toISOString()
       })
     })
 
@@ -96,6 +96,13 @@ export class TripsComponent {
 
     this.entries = data.entries
     console.log(this.entries)
+  }
+
+  filterEntriesByDay(entries: any[]) {
+    console.log(this.modalDate);
+    let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate());
+    console.log(entriesByDay);
+    return entriesByDay;
   }
 
   getCookie(cname: string): string {
