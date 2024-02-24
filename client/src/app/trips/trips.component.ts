@@ -46,7 +46,8 @@ export class TripsComponent {
   }
 
   setModalDate(day: number) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day);
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day + 1, 0, 0, 0, 0);
+    this.error = this.modalDate.toISOString()
   }
 
   changeConcept(event: Event) {
@@ -60,7 +61,7 @@ export class TripsComponent {
   async addEntry(event: Event) {
     event.preventDefault();
 
-    console.log(this.modalDate)
+    this.error = this.modalDate.toISOString()
 
     var response = await fetch('/api/entry', {
       method: 'POST',
@@ -101,9 +102,7 @@ export class TripsComponent {
   }
 
   filterEntriesByDay(entries: any[]) {
-    console.log(this.modalDate);
     let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate());
-    console.log(entriesByDay);
     return entriesByDay;
   }
 
