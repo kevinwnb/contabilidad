@@ -82,7 +82,8 @@ export class TripsComponent {
       body: JSON.stringify({
         concept: this.concept,
         amount: this.amount,
-        date: this.modalDate.toISOString()
+        date: this.modalDate.toISOString(),
+        category: this.category
       })
     })
 
