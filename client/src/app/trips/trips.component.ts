@@ -112,8 +112,8 @@ export class TripsComponent {
     console.log(this.entries)
   }
 
-  filterEntriesByDay(entries: any[]) {
-    let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate());
+  filterEntriesByDay(entries: any[], category: number) {
+    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.idcategoria == category);
     return entriesByDay;
   }
 

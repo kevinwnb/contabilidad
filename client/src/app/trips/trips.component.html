@@ -6,9 +6,12 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
-          *ngFor="let entry of filterEntriesByDay(entries)"><span>{{entry.concepto}}</span> <b
-            class="ms-auto">{{entry.cantidad}}€</b></p>
+        <div *ngFor="let category of categories; index as i" class="mb-3" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
+          <h3>{{category}}</h3>
+          <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
+            *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
+              class="ms-auto">{{entry.cantidad}}€</b></p>
+        </div>
         <form (submit)="addEntry($event)">
           <p class="alert alert-danger" *ngIf="error">{{error}}</p>
           <div class="mb-3">
@@ -25,8 +28,10 @@
               <option *ngFor="let category of categories; index as i" [value]="i">{{category}}</option>
             </select>
           </div>
-          <button class="button-success" [class.disabled]="category == 0" [disabled]="category == 0" type="submit">+ Añadir</button>
-          <small class="text-danger mt-2" [style.visibility]="category == 0 ? 'visible' : 'hidden'">Selecciona una categoría</small>
+          <button class="button-success" [class.disabled]="category == 0" [disabled]="category == 0" type="submit">+
+            Añadir</button>
+          <small class="text-danger mt-2" [style.visibility]="category == 0 ? 'visible' : 'hidden'">Selecciona una
+            categoría</small>
         </form>
       </div>
       <div class="modal-footer">
@@ -59,6 +64,8 @@
 
 <div class="details">
   <div>
-    <h2>Total año: <span style="font-weight: bold;" [style.color]="calculateTotal() < 0 ? 'red' : calculateTotal() > 0 ? 'limegreen' : 'gray'">{{calculateTotal()}}€</span></h2>
+    <h2>Total año: <span style="font-weight: bold;"
+        [style.color]="calculateTotal() < 0 ? 'red' : calculateTotal() > 0 ? 'limegreen' : 'gray'">{{calculateTotal()}}€</span>
+    </h2>
   </div>
 </div>
