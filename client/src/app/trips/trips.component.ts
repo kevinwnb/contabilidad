@@ -117,6 +117,15 @@ export class TripsComponent {
     return sum;
   }
 
+  calculateTotal() {
+    let total = 0;
+    this.entries.forEach(entry => {
+      total += entry.cantidad;
+    })
+
+    return total;
+  }
+
   getCookie(cname: string): string {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);

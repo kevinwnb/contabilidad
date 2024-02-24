@@ -6,7 +6,9 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0" *ngFor="let entry of filterEntriesByDay(entries)"><span>{{entry.concepto}}</span> <b class="ms-auto">{{entry.cantidad}}€</b></p>
+        <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
+          *ngFor="let entry of filterEntriesByDay(entries)"><span>{{entry.concepto}}</span> <b
+            class="ms-auto">{{entry.cantidad}}€</b></p>
         <form (submit)="addEntry($event)">
           <p class="alert alert-danger" *ngIf="error">{{error}}</p>
           <div class="mb-3">
@@ -29,6 +31,9 @@
 
 <div class="calendar">
   <h2>{{currentMonth}}</h2>
+  <button>Todo</button>
+  <button>Categoría 1</button>
+  <button>Categoría 2</button>
   <div class="calendar-container">
     <div class="day" *ngFor="let day of daysBeforeCurrent">
 
@@ -36,10 +41,17 @@
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
       (click)="setModalDate(day)">
       <h4>{{day}}</h4><small class="ms-2">{{getEntriesCount(day)}} entradas</small>
-      <b class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0" [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
+      <b class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
+        [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 
     </div>
+  </div>
+</div>
+
+<div class="details">
+  <div>
+    <h2>Total año: <span style="font-weight: bold;" [style.color]="calculateTotal() < 0 ? 'red' : calculateTotal() > 0 ? 'limegreen' : 'gray'">{{calculateTotal()}}€</span></h2>
   </div>
 </div>
