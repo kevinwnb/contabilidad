@@ -18,7 +18,7 @@ export class TripsComponent {
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
   currentMonth = this.monthNames[(new Date()).getMonth()];
-  monthDisplayed = (new Date()).getMonth();
+  monthDisplayed = (new Date()).getMonth() + 1;
   yearDisplayed = (new Date()).getFullYear();
   eod = 0;
 
@@ -45,8 +45,8 @@ export class TripsComponent {
     return (new Date(now.getFullYear(), now.getMonth() + 2, 0)).getDate();
   }
 
-  setModalDate(day: any) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, Number(day));
+  setModalDate(day: number) {
+    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed, day);
   }
 
   changeConcept(event: Event) {
@@ -59,6 +59,8 @@ export class TripsComponent {
 
   async addEntry(event: Event) {
     event.preventDefault();
+
+    console.log(this.modalDate)
 
     var response = await fetch('/api/entry', {
       method: 'POST',
