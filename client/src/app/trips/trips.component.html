@@ -19,6 +19,13 @@
             <label for="concept" class="form-label">Concepto</label>
             <input type="text" id="concept" [value]="concept" (change)="changeConcept($event)" placeholder="Concepto">
           </div>
+          <div class="mb-3">
+            <label for="category" class="form-label">Categoría</label>
+            <select id="category" [value]="0" (change)="changeCategory($event)">
+              <option *ngFor="let category of categories; index as i" [value]="i">{{category}}</option>
+            </select>
+            {{category}}
+          </div>
           <button class="button-success" type="submit">+ Añadir</button>
         </form>
       </div>

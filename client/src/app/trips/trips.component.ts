@@ -26,8 +26,27 @@ export class TripsComponent {
   concept = "";
   amount = "";
 
+  categories = [
+    "Seleccione una categoría",
+    "Comida",
+    "Transporte",
+    "Casa",
+    "Educación",
+    "Salud",
+    "Otros",
+    "Cafetería Miranda",
+    "Cafetería Kevin",
+    "Pastelería Miranda",
+  ];
+
+  category = this.categories[0];
+
   constructor() {
     this.populateEntries();
+  }
+
+  changeCategory(event: Event) {
+    this.category = this.categories[parseInt((event.target as HTMLInputElement).value)]
   }
 
   daysInThisMonth() {
