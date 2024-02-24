@@ -6,7 +6,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let category of categories; index as i" class="mb-3" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
+        <div *ngFor="let category of categories; index as i" class="mb-3 category-container" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
           <h3>{{category}}</h3>
           <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
             *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
