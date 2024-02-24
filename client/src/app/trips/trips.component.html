@@ -24,9 +24,9 @@
             <select id="category" [value]="0" (change)="changeCategory($event)">
               <option *ngFor="let category of categories; index as i" [value]="i">{{category}}</option>
             </select>
-            {{category}}
           </div>
-          <button class="button-success" type="submit">+ Añadir</button>
+          <button class="button-success" [class.disabled]="category == 0" [disabled]="category == 0" type="submit">+ Añadir</button>
+          <small class="text-danger mt-2" [style.visibility]="category == 0 ? 'visible' : 'hidden'">Selecciona una categoría</small>
         </form>
       </div>
       <div class="modal-footer">
