@@ -6,8 +6,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let category of categories; index as i" class="mb-3 category-container" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
-          <h3>{{category}}</h3>
+        <div *ngFor="let des of designations; index as i" class="mb-3 category-container" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
+          <h3>{{des}}</h3>
           <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
             *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
               class="ms-auto">{{entry.cantidad}}€</b></p>
@@ -23,15 +23,15 @@
             <input type="text" id="concept" [value]="concept" (change)="changeConcept($event)" placeholder="Concepto">
           </div>
           <div class="mb-3">
-            <label for="category" class="form-label">Categoría</label>
-            <select id="category" [disabled]="designation != 5" (change)="changeCategory($event)">
+            <label for="designation" class="form-label">Designación</label>
+            <select id="designation" [disabled]="designation != 5" (change)="changeSelectedDesignation($event)">
               <option *ngFor="let des of designations; index as i"  [selected]="designation == i" [value]="i">{{des}}</option>
             </select>
           </div>
-          <button class="button-success" [class.disabled]="category == 0" [disabled]="category == 0" type="submit">+
+          <button class="button-success" [class.disabled]="selectedDesignation == 0" [disabled]="selectedDesignation == 0" type="submit">+
             Añadir</button>
-          <small class="text-danger mt-2" [style.visibility]="category == 0 ? 'visible' : 'hidden'">Selecciona una
-            categoría</small>
+          <small class="text-danger mt-2" [style.visibility]="selectedDesignation == 0 ? 'visible' : 'hidden'">Selecciona una
+            designación</small>
         </form>
       </div>
       <div class="modal-footer">

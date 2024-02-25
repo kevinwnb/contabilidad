@@ -14,6 +14,7 @@ export class TripsComponent {
 
   designations = ['Sin designación', 'Cafetería Kevin', 'Cafetería Miranda', 'Pastelería Miranda Mezquita', 'Pastelería Miranda Carlos III', 'Gerencia'];
   designation = parseInt(this.getCookie('designation_id')) || 0;
+  selectedDesignation = this.designation;
 
   modalDate: Date = new Date();
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
@@ -32,22 +33,12 @@ export class TripsComponent {
   concept = "";
   amount = "";
 
-  categories = [
-    "Sin categoría",
-    "Cafetería Kevin",
-    "Cafetería Miranda",
-    "Pastelería Miranda Mezquita",
-    "Pastelería Miranda Carlos III",
-  ];
-
-  category = 0;
-
   constructor() {
     this.populateEntries();
   }
 
-  changeCategory(event: Event) {
-    this.category = this.categories.indexOf(this.categories[parseInt((event.target as HTMLInputElement).value)])
+  changeSelectedDesignation(event: Event) {
+    this.selectedDesignation = this.designations.indexOf(this.designations[parseInt((event.target as HTMLInputElement).value)])
   }
 
   daysInThisMonth() {
@@ -92,7 +83,7 @@ export class TripsComponent {
         concept: this.concept,
         amount: this.amount,
         date: this.modalDate.toISOString(),
-        category: this.category
+        designation: this.selectedDesignation
       })
     })
 
