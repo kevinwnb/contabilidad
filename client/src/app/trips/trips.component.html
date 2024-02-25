@@ -6,7 +6,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <div *ngFor="let des of designations; index as i" class="mb-3 category-container" [class.d-none]="filterEntriesByDay(entries, i).length == 0">
+        <div *ngFor="let des of designations; index as i" class="mb-3 category-container"
+          [class.d-none]="filterEntriesByDay(entries, i).length == 0">
           <h3>{{des}}</h3>
           <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
             *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
@@ -25,12 +26,15 @@
           <div class="mb-3">
             <label for="designation" class="form-label">Designación</label>
             <select id="designation" (change)="changeSelectedDesignation($event)">
-              <option [class.d-none]="i != designation && designation != 5" *ngFor="let des of designations; index as i"  [selected]="designation == i" [value]="i">{{des}}</option>
+              <option [class.d-none]="i != designation && designation != 5" *ngFor="let des of designations; index as i"
+                [selected]="designation == i" [value]="i">{{des}}</option>
             </select>
           </div>
-          <button class="button-success" [class.disabled]="selectedDesignation == 0" [disabled]="selectedDesignation == 0" type="submit">+
+          <button class="button-success" [class.disabled]="selectedDesignation == 0"
+            [disabled]="selectedDesignation == 0" type="submit">+
             Añadir</button>
-          <small class="text-danger mt-2" [style.visibility]="selectedDesignation == 0 ? 'visible' : 'hidden'">Selecciona una
+          <small class="text-danger mt-2"
+            [style.visibility]="selectedDesignation == 0 ? 'visible' : 'hidden'">Selecciona una
             designación</small>
         </form>
       </div>
@@ -55,6 +59,8 @@
       <h4>{{day}}</h4><small *ngIf="role == 1" class="ms-2">{{getEntriesCount(day)}} entradas</small>
       <b *ngIf="role == 1" class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
         [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
+      <b *ngIf="role == 3 && getEntryCheck(day)" class="text-primary">Cierre enviado</b>
+      <b *ngIf="role == 3 && !getEntryCheck(day)" class="text-success">Enviar cierre</b>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">
 

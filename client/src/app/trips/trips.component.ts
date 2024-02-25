@@ -96,7 +96,7 @@ export class TripsComponent {
   }
 
   async populateEntries() {
-    var response = await fetch('/api/entry/' + this.monthDisplayed + '/' + this.yearDisplayed + '/all', {
+    var response = await fetch('/api/entry' + (this.role == 3 ? '/employee/' : '') + this.monthDisplayed + '/' + this.yearDisplayed + '/all', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + this.getCookie('token'),
@@ -129,6 +129,14 @@ export class TripsComponent {
     });
 
     return Math.round((sum + Number.EPSILON) * 100) / 100;
+  }
+
+  getEntryCheck(day: number) {
+    let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == day);
+    if (entriesByDay.length > 0)
+      return true
+    else
+      return false
   }
 
   calculateTotal() {
