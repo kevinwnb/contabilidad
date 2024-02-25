@@ -24,8 +24,8 @@
           </div>
           <div class="mb-3">
             <label for="designation" class="form-label">Designación</label>
-            <select id="designation" [disabled]="designation != 5" (change)="changeSelectedDesignation($event)">
-              <option *ngFor="let des of designations; index as i"  [selected]="designation == i" [value]="i">{{des}}</option>
+            <select id="designation" (change)="changeSelectedDesignation($event)">
+              <option [class.d-none]="i != designation && designation != 5" *ngFor="let des of designations; index as i"  [selected]="designation == i" [value]="i">{{des}}</option>
             </select>
           </div>
           <button class="button-success" [class.disabled]="selectedDesignation == 0" [disabled]="selectedDesignation == 0" type="submit">+
