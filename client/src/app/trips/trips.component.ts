@@ -96,7 +96,7 @@ export class TripsComponent {
   }
 
   async populateEntries() {
-    var response = await fetch('/api/entry' + (this.role == 3 ? '/employee/' : '') + this.monthDisplayed + '/' + this.yearDisplayed + '/all', {
+    var response = await fetch('/api/entry' + (this.role == 3 ? '/employee/' : '/') + this.monthDisplayed + '/' + this.yearDisplayed + '/all', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + this.getCookie('token'),
@@ -112,8 +112,8 @@ export class TripsComponent {
     console.log(this.entries)
   }
 
-  filterEntriesByDay(entries: any[], category: number) {
-    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.idcategoria == category);
+  filterEntriesByDay(entries: any[], designation: number) {
+    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.designation_id == designation);
     return entriesByDay;
   }
 

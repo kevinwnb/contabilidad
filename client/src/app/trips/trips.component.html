@@ -13,7 +13,8 @@
             *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
               class="ms-auto">{{entry.cantidad}}€</b></p>
         </div>
-        <form (submit)="addEntry($event)">
+        <p *ngIf="role === 3 && getEntryCheck(modalDate.getDate())" class="alert alert-primary">Cierre enviado</p>
+        <form *ngIf="role < 3 || role === 3 && !getEntryCheck(modalDate.getDate())" (submit)="addEntry($event)">
           <p class="alert alert-danger" *ngIf="error">{{error}}</p>
           <div class="mb-3">
             <label for="amount" class="form-label">Cantidad €</label>

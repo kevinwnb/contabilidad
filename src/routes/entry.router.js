@@ -5,7 +5,7 @@ const auth = require("../middleware/auth")
 
 router.get("/:month/:year/all", [auth, (req, res, next) => {
     if (res.locals.user.role_id == 1 || res.locals.user.role_id == 2) {
-        next()
+        return next()
     }
 
     return res.send("Unauthorized")
