@@ -24,8 +24,8 @@
           </div>
           <div class="mb-3">
             <label for="category" class="form-label">Categoría</label>
-            <select id="category" [value]="0" (change)="changeCategory($event)">
-              <option *ngFor="let category of categories; index as i" [value]="i">{{category}}</option>
+            <select id="category" [disabled]="designation != 5" (change)="changeCategory($event)">
+              <option *ngFor="let des of designations; index as i"  [selected]="designation == i" [value]="i">{{des}}</option>
             </select>
           </div>
           <button class="button-success" [class.disabled]="category == 0" [disabled]="category == 0" type="submit">+
@@ -52,8 +52,8 @@
     </div>
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
       (click)="setModalDate(day)">
-      <h4>{{day}}</h4><small class="ms-2">{{getEntriesCount(day)}} entradas</small>
-      <b class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
+      <h4>{{day}}</h4><small *ngIf="role == 1" class="ms-2">{{getEntriesCount(day)}} entradas</small>
+      <b *ngIf="role == 1" class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
         [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
     </div>
     <div class="day" *ngFor="let day of daysAfterCurrent">

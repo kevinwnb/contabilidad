@@ -9,6 +9,12 @@ export class TripsComponent {
   error: string;
   entries: any[] = [];
 
+  roles = ['Sin identificación', 'CEO', 'Administrador', 'Empleado']
+  role = parseInt(this.getCookie('role_id')) || 0;
+
+  designations = ['Sin designación', 'Cafetería Kevin', 'Cafetería Miranda', 'Pastelería Miranda Mezquita', 'Pastelería Miranda Carlos III', 'Gerencia'];
+  designation = parseInt(this.getCookie('designation_id')) || 0;
+
   modalDate: Date = new Date();
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
   weekday = this.weekdayOfFirstDay();
@@ -28,9 +34,10 @@ export class TripsComponent {
 
   categories = [
     "Sin categoría",
-    "Pastelería Miranda",
-    "Cafetería Miranda",
     "Cafetería Kevin",
+    "Cafetería Miranda",
+    "Pastelería Miranda Mezquita",
+    "Pastelería Miranda Carlos III",
   ];
 
   category = 0;
@@ -59,15 +66,17 @@ export class TripsComponent {
   }
 
   setModalDate(day: number) {
-    this.modalDate = new Date(this.yearDisplayed, this.monthDisplayed - 1, day, 1, 0, 0, 0);
+    var date = new Date(this.yearDisplayed, this.monthDisplayed - 1, day)
+    var userTimezoneOffset = date.getTimezoneOffset() * 60000;
+    this.modalDate = new Date(date.getTime() - userTimezoneOffset);
   }
 
   changeConcept(event: Event) {
-    this.concept = (event.target as HTMLInputElement).value
+    this.concept = (event.target as HTMLInputElement).value;
   }
 
   changeAmount(event: Event) {
-    this.amount = (event.target as HTMLInputElement).value
+    this.amount = (event.target as HTMLInputElement).value;
   }
 
   async addEntry(event: Event) {
