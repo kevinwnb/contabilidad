@@ -10,7 +10,7 @@ import { CreateAccountComponent } from './create-account/create-account.componen
 import { SettingsComponent } from './settings/settings.component';
 
 const routes: Routes = [
-  { path: "", redirectTo: "home", pathMatch: "full" },
+  { path: "", redirectTo: "trips", pathMatch: "full" },
   { path: "login", component: LoginComponent },
   { path: "create-account", component: CreateAccountComponent },
   { path: "home", component: HomeComponent, canActivate: [authGuard] },
