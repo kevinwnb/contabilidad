@@ -14,7 +14,7 @@ export class TripsComponent {
 
   designations = ['Sin designación', 'Cafetería Kevin', 'Cafetería Miranda', 'Pastelería Miranda Mezquita', 'Pastelería Miranda Carlos III', 'Gerencia'];
   designation = parseInt(this.getCookie('designation_id')) || 0;
-  selectedDesignation = this.designation;
+  selectedDesignation = this.designation == 5 ? 0 : this.designation;
 
   modalDate: Date = new Date();
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
