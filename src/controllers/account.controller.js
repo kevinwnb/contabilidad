@@ -22,7 +22,7 @@ module.exports = {
             if (err)
                 return res.json({ success: false, error: "An error ocurred on our end, please try again later" + process.env.DATABASE })
 
-            con.query("SELECT id, email, password, role_id, designation_id FROM users WHERE email = ?", req.body.email, function (err, result) {
+            con.query("SELECT id, CONCAT(first_name, ' ', last_name) AS name, email, password, role_id, designation_id FROM users WHERE email = ?", req.body.email, function (err, result) {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later" + err.message })
 
@@ -39,8 +39,9 @@ module.exports = {
                         return res.json({ success: false, error: "Invalid username or password" })
                     }
 
-                    let token = jwt.sign({ id: user.id, email: user.email, role_id: user.role_id, designation_id: user.designation_id }, process.env.PRIVATE_KEY, { expiresIn: "1h" })
+                    let token = jwt.sign({ id: user.id, name: user.name, email: user.email, role_id: user.role_id, designation_id: user.designation_id }, process.env.PRIVATE_KEY, { expiresIn: "1h" })
                     res.cookie("token", token)
+                    res.cookie("user_name", user.name)
                     res.cookie("role_id", user.role_id)
                     res.cookie("designation_id", user.designation_id)
                     return res.json({ success: true, token: token })

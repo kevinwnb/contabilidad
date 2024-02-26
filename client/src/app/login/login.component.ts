@@ -53,6 +53,6 @@ export class LoginComponent {
         this.isLoading = false
         this.router.navigate(['/trips'])
       }
-    }, 3000)
+    }, 0)
   }
 }

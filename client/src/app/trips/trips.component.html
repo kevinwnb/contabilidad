@@ -16,6 +16,10 @@
         <p *ngIf="role === 3 && getEntryCheck(modalDate.getDate())" class="alert alert-primary">Cierre enviado</p>
         <form *ngIf="role < 3 || role === 3 && !getEntryCheck(modalDate.getDate())" (submit)="addEntry($event)">
           <p class="alert alert-danger" *ngIf="error">{{error}}</p>
+          <div *ngIf="role > 1" class="mb-3">
+            <label for="name" class="form-label">Nombre operador</label>
+            <input type="text" id="name" readonly [value]="getCookie('user_name')">
+          </div>
           <div class="mb-3">
             <label for="amount" class="form-label">Cantidad €</label>
             <input type="text" [value]="amount" (change)="changeAmount($event)" id="amount" placeholder="100">

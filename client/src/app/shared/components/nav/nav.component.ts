@@ -21,11 +21,9 @@ export class NavComponent {
 
   onLogout(e: Event) {
     this.isLoadingChange.emit(true);
-    setTimeout(() => {
-      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      this.isLoadingChange.emit(false);
-      this.router.navigate(['/login']);
-    }, 3000);
+    document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    this.isLoadingChange.emit(false);
+    this.router.navigate(['/login']);
   }
 
   getCookie(name: string) {
