@@ -39,8 +39,8 @@ export class FinancesComponent {
     this.chartOptions = {
       series: [
         {
-          name: "Gross",
-          data: [76, 20]
+          name: "Total mes",
+          data: [760, 20]
         },
         // {
         //   name: "Loss",
@@ -84,7 +84,7 @@ export class FinancesComponent {
       },
       yaxis: {
         title: {
-          text: "$ (thousands)"
+          text: "€"
         }
       },
       fill: {
@@ -93,7 +93,7 @@ export class FinancesComponent {
       tooltip: {
         y: {
           formatter: function (val: any) {
-            return "$ " + val + " thousands";
+            return val + "€";
           }
         }
       }
