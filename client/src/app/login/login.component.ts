@@ -14,7 +14,7 @@ export class LoginComponent {
 
   loginForm = this.formBuilder.group({
     email: 'a@a.aa',
-    password: 'aaaaaa'
+    password: 'Kevin1703'
   })
 
   isLoading = false
