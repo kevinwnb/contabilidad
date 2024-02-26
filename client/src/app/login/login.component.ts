@@ -31,7 +31,7 @@ export class LoginComponent {
   }
 
   onSubmit() {
-    this.isLoading = true
+    //this.isLoading = true
     setTimeout(async () => {
       const response = await fetch("/api/login", {
         method: "POST",
