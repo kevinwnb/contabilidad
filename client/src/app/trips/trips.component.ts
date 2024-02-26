@@ -119,7 +119,7 @@ export class TripsComponent {
   }
 
   filterEntriesByDay(entries: any[], designation: number) {
-    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.designation_id == designation);
+    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.designation_id == designation || designation == 5);
     return entriesByDay;
   }
 
@@ -131,7 +131,7 @@ export class TripsComponent {
     let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == day);
     let sum = 0;
     entriesByDay.forEach(entry => {
-      sum += entry.cantidad;
+      sum += parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta);
     });
 
     return Math.round((sum + Number.EPSILON) * 100) / 100;
@@ -154,6 +154,10 @@ export class TripsComponent {
     return total;
   }
 
+  calculateDifference(opening: number, closing: number, mastercard: number) {
+    return closing - opening + mastercard;
+  }
+
   changeOpening(event: Event) {
     this.opening = (event.target as HTMLInputElement).value;
   }
@@ -164,6 +168,10 @@ export class TripsComponent {
 
   changeMastercard(event: Event) {
     this.mastercard = (event.target as HTMLInputElement).value;
+  }
+
+  removeGerenteFromDesignations(designations: string[]) {
+    return designations.filter((designation, i) => i != 5);
   }
 
   getCookie(cname: string): string {
