@@ -55,7 +55,7 @@ module.exports = {
         })
     },
     create: (req, res) => {
-        if (!req.body.amount || !req.body.date || !req.body.concept || !req.body.designation)
+        if (!req.body.operator || !req.body.closing || !req.body.opening || !req.body.mastercard || !req.body.date || !req.body.concept || !req.body.designation)
             return res.json({ success: false, error: "Por favor proporcione todos los campos requeridos" })
 
         var con = mysql.createConnection({
@@ -72,7 +72,7 @@ module.exports = {
                 return res.json({ success: false, error: "An error ocurred on our end, please try again later1" })
 
 
-            con.query("INSERT INTO entradas (concepto, cantidad, fecha, designation_id) VALUES (?, ?, ?, ?)", [req.body.concept, parseFloat(req.body.amount), req.body.date.split("T")[0], parseInt(req.body.designation)], function (err, result) {
+            con.query("INSERT INTO entradas (concepto, cierre_contado, apertura_contado, tarjeta, fecha, designation_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.concept, parseFloat(req.body.closing), parseFloat(req.body.opening), parseFloat(req.body.mastercard), req.body.date.split("T")[0], parseInt(req.body.designation), parseInt(req.body.operator)], function (err, result) {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later2" + err.message })
 

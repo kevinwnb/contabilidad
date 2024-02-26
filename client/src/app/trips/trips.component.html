@@ -21,12 +21,20 @@
             <input type="text" id="name" readonly [value]="getCookie('user_name')">
           </div>
           <div class="mb-3">
-            <label for="amount" class="form-label">Cantidad €</label>
-            <input type="text" [value]="amount" (change)="changeAmount($event)" id="amount" placeholder="100">
+            <label for="opening" class="form-label">Apertura contado €</label>
+            <input type="text" [value]="opening" (change)="changeOpening($event)" id="amount" placeholder="100">
+          </div>
+          <div class="mb-3">
+            <label for="closing" class="form-label">Cierre contado €</label>
+            <input type="text" [value]="closing" (change)="changeClosing($event)" id="amount" placeholder="100">
+          </div>
+          <div class="mb-3">
+            <label for="mastercard" class="form-label">Tarjeta €</label>
+            <input type="text" [value]="mastercard" (change)="changeMastercard($event)" id="amount" placeholder="100">
           </div>
           <div class="mb-3">
             <label for="concept" class="form-label">Concepto</label>
-            <input type="text" id="concept" [value]="concept" (change)="changeConcept($event)" placeholder="Concepto">
+            <input type="text" id="concept" [value]="concept" [readOnly]="role > 2" (change)="changeConcept($event)" placeholder="Concepto">
           </div>
           <div class="mb-3">
             <label for="designation" class="form-label">Designación</label>

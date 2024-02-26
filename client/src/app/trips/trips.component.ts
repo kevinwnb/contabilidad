@@ -30,8 +30,11 @@ export class TripsComponent {
   eod = 0;
 
   //entry form
-  concept = "";
+  concept = parseInt(this.getCookie('role_id')) < 3 ? "" : "Cierre de caja";
   amount = "";
+  opening = "";
+  closing = "";
+  mastercard = "";
 
   constructor() {
     this.populateEntries();
@@ -80,8 +83,11 @@ export class TripsComponent {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
+        operator: this.getCookie('user_id'),
         concept: this.concept,
-        amount: this.amount,
+        opening: this.opening,
+        closing: this.closing,
+        mastercard: this.mastercard,
         date: this.modalDate.toISOString(),
         designation: this.selectedDesignation
       })
@@ -146,6 +152,18 @@ export class TripsComponent {
     })
 
     return total;
+  }
+
+  changeOpening(event: Event) {
+    this.opening = (event.target as HTMLInputElement).value;
+  }
+
+  changeClosing(event: Event) {
+    this.closing = (event.target as HTMLInputElement).value;
+  }
+
+  changeMastercard(event: Event) {
+    this.mastercard = (event.target as HTMLInputElement).value;
   }
 
   getCookie(cname: string): string {

@@ -41,6 +41,7 @@ module.exports = {
 
                     let token = jwt.sign({ id: user.id, name: user.name, email: user.email, role_id: user.role_id, designation_id: user.designation_id }, process.env.PRIVATE_KEY, { expiresIn: "1h" })
                     res.cookie("token", token)
+                    res.cookie("user_id", user.id)
                     res.cookie("user_name", user.name)
                     res.cookie("role_id", user.role_id)
                     res.cookie("designation_id", user.designation_id)
