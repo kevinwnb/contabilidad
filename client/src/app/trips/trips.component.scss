@@ -93,6 +93,10 @@ button.button-success {
   border-bottom: 1px solid black;
 }
 
+button.filter-active {
+  background-color: #0080ff;
+}
+
 div.loading {
   width: 100%;
   display: flex;

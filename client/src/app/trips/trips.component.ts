@@ -36,6 +36,8 @@ export class TripsComponent {
   closing = "";
   mastercard = "";
 
+  designationFilter = -1;
+
   constructor() {
     this.populateEntries();
   }
@@ -141,6 +143,14 @@ export class TripsComponent {
     return Math.round((sum + Number.EPSILON) * 100) / 100;
   }
 
+  getEntrySum(day: number) {
+    let entry = this.entries.find(entry => new Date(entry.fecha).getDate() == day && entry.designation_id == this.designationFilter);
+    if (entry)
+      return parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta)
+    else
+      return 0
+  }
+
   getEntryCheck(day: number) {
     let entriesByDay = this.entries.filter(entry => new Date(entry.fecha).getDate() == day);
     if (entriesByDay.length > 0)
@@ -149,10 +159,11 @@ export class TripsComponent {
       return false
   }
 
-  calculateTotal() {
+  calculateTotal(designationFilter: number) {
+    let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
     let total = 0;
-    this.entries.forEach(entry => {
-      total += entry.cantidad;
+    entries.forEach(entry => {
+      total += entry.cierre_contado - entry.apertura_contado + entry.tarjeta;
     })
 
     return total;
@@ -181,6 +192,10 @@ export class TripsComponent {
   validateCurrencyFormat(input: string) {
     let regex = /^\d\.\d\d\d,\d\d$|^\d\d\d,\d\d$|^\d\d,\d\d$|^\d,\d\d$|^\d\.\d\d\d$|^\d\d\d$|^\d\d$|^\d$/i;
     return regex.test(input);
+  }
+
+  filterByDesignation(designation: number) {
+    this.designationFilter = designation;
   }
 
   getCookie(cname: string): string {

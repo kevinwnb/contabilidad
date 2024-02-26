@@ -77,9 +77,8 @@
 <div class="calendar">
   <h2>{{currentMonth}}</h2>
   <div class="filters" *ngIf="role < 3">
-    <button>Todo</button>
-    <button>Categoría 1</button>
-    <button>Categoría 2</button>
+    <button [class.filter-active]="designationFilter == -1" (click)="filterByDesignation(-1)">Todo</button>
+    <button [class.filter-active]="designationFilter == i" *ngFor="let des of removeGerenteFromDesignations(designations); index as i" (click)="filterByDesignation(i)">{{des}}</button>
   </div>
   <div class="calendar-container">
     <div class="day" *ngFor="let day of daysBeforeCurrent">
@@ -87,9 +86,11 @@
     </div>
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
       (click)="setModalDate(day)">
-      <h4>{{day}}</h4><small *ngIf="role == 1" class="ms-2">{{getEntriesCount(day)}} entradas</small>
-      <b *ngIf="role == 1" class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
+      <h4>{{day}}</h4><small *ngIf="role == 1 && designationFilter == -1" class="ms-2">{{getEntriesCount(day)}} entradas</small>
+      <b *ngIf="role == 1 && designationFilter == -1" class="eod" [class.green]="getEntriesSum(day) > 0" [class.neutral]="getEntriesSum(day) == 0"
         [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
+        <b *ngIf="role == 1 && designationFilter != -1" class="eod" [class.green]="getEntrySum(day) > 0" [class.neutral]="getEntrySum(day) == 0"
+          [class.red]="getEntrySum(day) < 0">{{getEntrySum(day)}}€</b>
       <b *ngIf="role == 3 && getEntryCheck(day)" class="text-primary">Cierre enviado</b>
       <b *ngIf="role == 3 && !getEntryCheck(day)" class="text-success">Enviar cierre</b>
     </div>
@@ -101,8 +102,8 @@
 
 <div *ngIf="role < 2" class="details">
   <div>
-    <h2>Total año: <span style="font-weight: bold;"
-        [style.color]="calculateTotal() < 0 ? 'red' : calculateTotal() > 0 ? 'limegreen' : 'gray'">{{calculateTotal()}}€</span>
+    <h2>Total año {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span style="font-weight: bold;"
+        [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{calculateTotal(designationFilter)}}€</span>
     </h2>
   </div>
 </div>
