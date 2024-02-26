@@ -26,6 +26,9 @@ module.exports = {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later" + err.message })
 
+                if (result.length === 0)
+                    return res.json({ success: false, error: "Usuario o contraseña incorrectos" })
+
                 var user = result[0]
 
                 bcrypt.compare(req.body.password, result[0].password, function (err, result) {
@@ -34,8 +37,8 @@ module.exports = {
 
                     console.log(req.body)
 
-                    if (!result){
-                        
+                    if (!result) {
+
                         return res.json({ success: false, error: "Invalid username or password" })
                     }
 
