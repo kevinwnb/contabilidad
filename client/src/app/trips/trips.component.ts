@@ -30,7 +30,7 @@ export class TripsComponent {
   eod = 0;
 
   //entry form
-  concept = parseInt(this.getCookie('role_id')) < 3 ? "" : "Cierre de caja";
+  concept = "Cierre " + this.designations[this.selectedDesignation];
   amount = "";
   opening = "";
   closing = "";
@@ -42,6 +42,7 @@ export class TripsComponent {
 
   changeSelectedDesignation(event: Event) {
     this.selectedDesignation = this.designations.indexOf(this.designations[parseInt((event.target as HTMLInputElement).value)])
+    this.concept = "Cierre " + this.designations[this.selectedDesignation]
   }
 
   daysInThisMonth() {
