@@ -40,12 +40,12 @@ export class FinancesComponent {
       series: [
         {
           name: "Gross",
-          data: [76, -85, 101, 98, 87, 105, 91, 114, 94]
+          data: [76, 20]
         },
-        {
-          name: "Net",
-          data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
-        }
+        // {
+        //   name: "Loss",
+        //   data: [44, 55, 57, 56, 61, 58, 63, 60, 66]
+        // }
       ],
       chart: {
         type: "bar",
@@ -68,15 +68,18 @@ export class FinancesComponent {
       },
       xaxis: {
         categories: [
+          "Ene",
           "Feb",
           "Mar",
-          "Apr",
+          "Abr",
           "May",
           "Jun",
           "Jul",
-          "Aug",
+          "Ago",
           "Sep",
-          "Oct"
+          "Oct",
+          "Nov",
+          "Dic"
         ]
       },
       yaxis: {
