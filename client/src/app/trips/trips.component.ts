@@ -80,8 +80,6 @@ export class TripsComponent {
     if (!this.validateCurrencyFormat(this.opening) || !this.validateCurrencyFormat(this.closing) || !this.validateCurrencyFormat(this.mastercard))
       return this.error = "Por favor introduce las cantidades usando como referencia el formato X.XXX,XX"
 
-      return this.error = "Passed " + this.opening
-
     var response = await fetch('/api/entry', {
       method: 'POST',
       headers: {
