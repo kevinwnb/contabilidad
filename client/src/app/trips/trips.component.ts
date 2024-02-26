@@ -77,6 +77,11 @@ export class TripsComponent {
   async addEntry(event: Event) {
     event.preventDefault();
 
+    if (!this.validateCurrencyFormat(this.opening) || !this.validateCurrencyFormat(this.closing) || !this.validateCurrencyFormat(this.mastercard))
+      return this.error = "Por favor introduce las cantidades usando como referencia el formato X.XXX,XX"
+
+      return this.error = "Passed " + this.opening
+
     var response = await fetch('/api/entry', {
       method: 'POST',
       headers: {
@@ -173,6 +178,11 @@ export class TripsComponent {
 
   removeGerenteFromDesignations(designations: string[]) {
     return designations.filter((designation, i) => i != 5);
+  }
+
+  validateCurrencyFormat(input: string) {
+    let regex = /^\d\.\d\d\d,\d\d$|^\d\d\d,\d\d$|^\d\d,\d\d$|^\d,\d\d$|^\d\.\d\d\d$|^\d\d\d$|^\d\d$|^\d$/i;
+    return regex.test(input);
   }
 
   getCookie(cname: string): string {
