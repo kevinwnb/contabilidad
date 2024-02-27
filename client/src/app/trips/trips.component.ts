@@ -79,6 +79,8 @@ export class TripsComponent {
   async addEntry(event: Event) {
     event.preventDefault();
 
+    this.error = '';
+
     if (!this.validateCurrencyFormat(this.opening) || !this.validateCurrencyFormat(this.closing) || !this.validateCurrencyFormat(this.mastercard))
       return this.error = "Por favor introduce las cantidades usando como referencia el formato X.XXX,XX"
 
@@ -125,7 +127,7 @@ export class TripsComponent {
   }
 
   filterEntriesByDay(entries: any[], designation: number) {
-    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && entry.designation_id == designation || designation == 5);
+    let entriesByDay = entries.filter(entry => new Date(entry.fecha).getDate() == this.modalDate.getDate() && (entry.designation_id == designation || designation == 5));
     return entriesByDay;
   }
 

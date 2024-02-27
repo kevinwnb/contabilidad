@@ -14,25 +14,29 @@
               class="ms-auto">{{entry.cantidad}}€</b></p>
         </div>
         <table *ngIf="role < 2" class="table">
-          <tr>
-            <th>Concepto</th>
-            <th>Apertura</th>
-            <th>Cierre</th>
-            <th>Tarjeta</th>
-            <th>Diferencia</th>
-          </tr>
-          <tr *ngFor="let entry of filterEntriesByDay(entries, 5)">
-            <td>{{entry.concepto}}</td>
-            <td>{{entry.apertura_contado}}€</td>
-            <td>{{entry.cierre_contado}}€</td>
-            <td>{{entry.tarjeta}}€</td>
-            <td>{{(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
-          </tr>
+          <thead>
+            <tr>
+              <th>Concepto</th>
+              <th>Apertura</th>
+              <th>Cierre</th>
+              <th>Tarjeta</th>
+              <th>Diferencia</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let entry of filterEntriesByDay(entries, 5)">
+              <td>{{entry.concepto}}</td>
+              <td>{{entry.apertura_contado}}€</td>
+              <td>{{entry.cierre_contado}}€</td>
+              <td>{{entry.tarjeta}}€</td>
+              <td>{{(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
+            </tr>
+          </tbody>
         </table>
         <p *ngIf="role === 3 && getEntryCheck(modalDate.getDate())" class="alert alert-primary">Cierre enviado</p>
         <form *ngIf="role < 3 || role === 3 && !getEntryCheck(modalDate.getDate())" (submit)="addEntry($event)">
           <p class="alert alert-danger" *ngIf="error">{{error}}</p>
-          <div *ngIf="role > 1" class="mb-3">
+          <div class="mb-3">
             <label for="name" class="form-label">Nombre operador</label>
             <input type="text" id="name" readonly [value]="getCookie('user_name')">
           </div>
