@@ -111,5 +111,28 @@ module.exports = {
 
         });
 
+    },
+
+    getAllUsers: (req, res) => {
+        var con = mysql.createConnection({
+            host: "localhost",
+            port: 3306,
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
+            multipleStatements: true
+        });
+
+        con.connect(function (err) {
+            if (err)
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+            con.query("SELECT id, email, first_name, last_name, role_id, designation_id FROM users", function (err, result) {
+                if (err)
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                return res.json({ success: true, users: result })
+            })
+        })
     }
 }

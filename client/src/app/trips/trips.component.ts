@@ -9,7 +9,7 @@ export class TripsComponent {
   error: string;
   entries: any[] = [];
 
-  roles = ['Sin identificación', 'CEO', 'Administrador', 'Empleado']
+  roles = ['Sin identificación', 'Gerente', 'Administrador', 'Empleado']
   role = parseInt(this.getCookie('role_id')) || 0;
 
   designations = ['Sin designación', 'Cafetería Kevin', 'Cafetería Miranda', 'Pastelería Miranda Mezquita', 'Pastelería Miranda Carlos III', 'Gerencia'];

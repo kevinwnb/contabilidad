@@ -8,6 +8,7 @@ import { BillsComponent } from './bills/bills.component';
 import { TripsComponent } from './trips/trips.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 const routes: Routes = [
   { path: "", redirectTo: "trips", pathMatch: "full" },
@@ -17,7 +18,8 @@ const routes: Routes = [
   { path: "trips", component: TripsComponent, canActivate: [authGuard] },
   { path: "refuel", component: RefuelComponent, canActivate: [authGuard] },
   { path: "bills", component: BillsComponent, canActivate: [authGuard] },
-  { path: "settings", component: SettingsComponent, canActivate: [authGuard] }
+  { path: "settings", component: SettingsComponent, canActivate: [authGuard] },
+  { path: "add-user", component: AddUserComponent, canActivate: [authGuard] }
 ];
 
 @NgModule({

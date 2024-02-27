@@ -25,6 +25,7 @@ import { BillsComponent } from './bills/bills.component';
 import { TripsComponent } from './trips/trips.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SettingsComponent } from './settings/settings.component';
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { SettingsComponent } from './settings/settings.component';
     BillsComponent,
     TripsComponent,
     CreateAccountComponent,
-    SettingsComponent
+    SettingsComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserModule,

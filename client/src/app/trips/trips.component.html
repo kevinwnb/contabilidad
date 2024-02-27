@@ -13,7 +13,7 @@
             *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
               class="ms-auto">{{entry.cantidad}}€</b></p>
         </div>
-        <table *ngIf="role < 2" class="table">
+        <table *ngIf="role < 2 && filterEntriesByDay(entries, 5).length > 0" class="table">
           <thead>
             <tr>
               <th>Concepto</th>

@@ -2,6 +2,7 @@
     <a *ngIf="role === 1" routerLink="/home" routerLinkActive="active"><i class="fa-solid fa-house"></i></a>
     <a routerLink="/trips" routerLinkActive="active"><i class="fa-solid fa-calendar-days"></i></a>
     <a *ngIf="role === 1" routerLink="/refuel" routerLinkActive="active"><i class="fa-solid fa-gas-pump"></i></a>
+    <a *ngIf="role === 1" routerLink="/add-user" routerLinkActive="active"><i class="fa-solid fa-user"></i></a>
     <a *ngIf="role === 1" routerLink="/bills" routerLinkActive="active"><i class="fa-solid fa-file-invoice"></i></a>
     <a *ngIf="role === 1" routerLink="/settings" routerLinkActive="active"><i class="fa-solid fa-gear"></i></a>
     <button (click)="onLogout($event)"><i class="fa-solid fa-arrow-right-from-bracket"></i></button>

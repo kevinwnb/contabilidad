@@ -1,0 +1,59 @@
+form {
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+}
+
+form > div > *:not(label) {
+  padding: 7px;
+}
+
+select > option {
+  padding: 10px;
+}
+
+button.button-success {
+  padding: 10px;
+  color: white;
+  background-color: green;
+  width: 100%;
+
+  &:disabled {
+    background-color: gray;
+    color: rgba(255,255,255,0.5);
+  }
+}
+
+button.button-warning {
+  padding: 10px;
+  color: #3C3C3C;
+  font-weight: bold;
+  background-color: gold;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &:disabled {
+    background-color: gray;
+    color: rgba(255,255,255,0.5);
+  }
+
+  > i {
+    margin-right: 10px;
+  }
+}
+
+button.button-sm {
+  padding: 5px;
+  width: auto;
+}
+
+.modal input {
+  width: 100%;
+  padding: 7px;
+}
