@@ -20,7 +20,7 @@ export class TripsComponent {
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
   weekday = this.weekdayOfFirstDay();
   daysBeforeCurrent = Array.from({ length: this.weekday - 1 }, (_, i) => i + 1);
-  daysAfterCurrent = Array(7 - this.weekday - this.getDaysToSubtract());
+  daysAfterCurrent = Array(7 - (this.weekday || 1) - this.getDaysToSubtract());
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
@@ -34,7 +34,7 @@ export class TripsComponent {
     this.changeDays()
     this.changeDaysBeforeCurrent()
     this.changeDaysAfterCurrent()
-    alert(this.weekday)
+    //alert(this.weekday)
     this.populateEntries();
   }
   currentMonth = this.monthNames[(new Date()).getMonth()];
@@ -68,7 +68,7 @@ export class TripsComponent {
   }
 
   changeDaysAfterCurrent() {
-    this.daysAfterCurrent = Array(7 - this.weekday - this.getDaysToSubtract())
+    this.daysAfterCurrent = Array(7 - (this.weekday || 1) - this.getDaysToSubtract())
   }
 
   changeSelectedDesignation(event: Event) {
