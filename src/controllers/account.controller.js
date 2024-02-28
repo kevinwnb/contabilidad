@@ -54,24 +54,8 @@ module.exports = {
         })
     },
     createAccount: (req, res) => {
-        if (!req.body.firstName || !req.body.lastName || !req.body.email || !req.body.password) {
-            return res.json({ success: false, error: "All fields are required" })
-        }
-
-        if (req.body.password.length < 6) {
-            return res.json({ success: false, error: "Password must be at least 6 characters long" })
-        }
-
-        const validateEmail = (email) => {
-            return String(email)
-                .toLowerCase()
-                .match(
-                    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-                );
-        };
-
-        if (!validateEmail(req.body.email)) {
-            return res.json({ success: false, error: "Invalid email" })
+        if (!req.body.first_name || !req.body.last_name || !req.body.email || !req.body.password || !req.body.role_id || !req.body.designation_id) {
+            return res.json({ success: false, error: "No se han proporcionado todos los campos" })
         }
 
         var con = mysql.createConnection({
@@ -92,17 +76,15 @@ module.exports = {
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
 
                 if (result.length > 0)
-                    return res.json({ success: false, error: "An account with this email already exists" })
+                    return res.json({ success: false, error: "Ya existe un usuario con este correo" })
 
                 bcrypt.hash(req.body.password, 10, function (err, hash) {
                     if (err)
                         return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
 
-                    con.query("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.email, hash], function (err, result) {
+                    con.query("INSERT INTO users (first_name, last_name, email, password, role_id, designation_id) VALUES (?, ?, ?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.email, hash, req.body.role_id, req.body.designation_id], function (err, result) {
                         if (err)
                             return res.json({ success: false, error: "An error ocurred on our end, please try again later" + err.message })
-
-                        console.log("Number of records inserted: " + result.affectedRows);
 
                         return res.json({ success: true, error: "" })
                     })

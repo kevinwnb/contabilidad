@@ -2,16 +2,51 @@
   <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title"><i class="fa-solid fa-key"></i> Cambio de contraseña</h5>
+        <h5 class="modal-title">{{getFormToShow()}}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form *ngIf="formToShow == 2">
           <p class="alert alert-danger" *ngIf="changeUserPasswordFormError">{{changeUserPasswordFormError}}</p>
           <input type="hidden" id="userId" [value]="changePasswordForm.user_id">
           <label for="password" class="form-label">Nueva contraseña</label>
           <input type="password" class="w-100" id="password" [value]="changePasswordForm.password" (change)="changePasswordForm.changePassword($event)">
           <button type="submit" class="w-100 mt-2" (click)="changeUserPassword(changePasswordForm.user_id)">Cambiar contraseña</button>
+        </form>
+        <form *ngIf="formToShow == 1">
+          <h1>Registrar usuario nuevo</h1>
+          <p class="alert alert-danger" *ngIf="registerUserFormError">{{registerUserFormError}}</p>
+          <div class="mb-3">
+            <label for="name" class="form-label">Nombre operador</label>
+            <input type="text" [value]="name" (change)="changeName($event)" id="name">
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Apellidos</label>
+            <input type="text" [value]="lastName" (change)="changeLastName($event)" id="lastName">
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" [value]="email" (change)="changeEmail($event)" id="email">
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" [value]="password" (change)="changePassword($event)" id="password">
+          </div>
+          <div class="mb-3">
+            <label for="role" class="form-label">Rol</label>
+            <select id="role" (change)="changeRole($event)">
+              <option *ngFor="let rol of removeFirstOptionFromRolesArray(roles); index as i" [selected]="role == i" [value]="i">
+                {{rol}}</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="designation" class="form-label">Designación</label>
+            <select id="designation" (change)="changeSelectedDesignation($event)">
+              <option *ngFor="let designation of designations; index as i" [selected]="selectedDesignation == i" [value]="i">
+                {{designation}}</option>
+            </select>
+          </div>
+          <button type="submit" class="button-success w-100 mt-4" (click)="addUser()">Anadir</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -43,44 +78,10 @@
       <td>{{user.email}}</td>
       <td>{{getRole(user.role_id)}}</td>
       <td>{{getDesignation(user.designation_id)}}</td>
-      <td><button data-bs-toggle="modal" data-bs-target="#modal" class="button-warning button-sm" (click)="changePasswordForm.setUserId(user.id)"><i class="fa-solid fa-key"></i> Cambiar contraseña</button></td>
+      <td><button data-bs-toggle="modal" data-bs-target="#modal" class="button-warning button-sm" (click)="changePasswordForm.setUserId(user.id); changeFormToShow(2)"><i class="fa-solid fa-key"></i> Cambiar contraseña</button></td>
       <td><button class="button-danger button-sm" (click)="deleteUser(user.id)"><i class="fa-regular fa-trash-can"></i> Eliminar</button></td>
     </tr>
   </tbody>
 </table>
 
-<form>
-  <h1>Registrar usuario nuevo</h1>
-  <p class="alert alert-danger" *ngIf="registerUserFormError">{{registerUserFormError}}</p>
-  <div class="mb-3">
-    <label for="name" class="form-label">Nombre operador</label>
-    <input type="text" [value]="name" (change)="changeName($event)" id="name">
-  </div>
-  <div class="mb-3">
-    <label for="lastName" class="form-label">Apellidos</label>
-    <input type="text" [value]="lastName" (change)="changeLastName($event)" id="lastName">
-  </div>
-  <div class="mb-3">
-    <label for="email" class="form-label">Email</label>
-    <input type="email" [value]="email" (change)="changeEmail($event)" id="email">
-  </div>
-  <div class="mb-3">
-    <label for="password" class="form-label">Password</label>
-    <input type="password" [value]="password" (change)="changePassword($event)" id="password">
-  </div>
-  <div class="mb-3">
-    <label for="role" class="form-label">Rol</label>
-    <select id="role" (change)="changeRole($event)">
-      <option *ngFor="let rol of removeFirstOptionFromRolesArray(roles); index as i" [selected]="role == i" [value]="i">
-        {{rol}}</option>
-    </select>
-  </div>
-  <div class="mb-3">
-    <label for="designation" class="form-label">Designación</label>
-    <select id="designation" (change)="changeSelectedDesignation($event)">
-      <option *ngFor="let designation of designations; index as i" [selected]="selectedDesignation == i" [value]="i">
-        {{designation}}</option>
-    </select>
-  </div>
-  <button type="submit" class="button-success w-100 mt-4" (click)="addUser()">Anadir</button>
-</form>
+<button class="button-success" id="addUser" data-bs-toggle="modal" data-bs-target="#modal" (click)="changeFormToShow(1)"><i class="fa-solid fa-plus"></i> Anadir</button>

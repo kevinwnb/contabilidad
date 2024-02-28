@@ -22,6 +22,9 @@ export class AddUserComponent {
   role = 3
   selectedDesignation = 0
 
+  formsAvailable = ['none', 'Añadir usuario', 'Cambio de contraseña', 'Eliminar usuario']
+  formToShow = 0
+
   changePasswordForm = {
     user_id: 0,
     password: '',
@@ -73,7 +76,7 @@ export class AddUserComponent {
     this.role = parseInt((event.target as HTMLInputElement).value)
   }
 
-  addUser() {
+  async addUser() {
     console.log(this.name, this.lastName, this.email, this.password, this.role)
   }
 
@@ -133,6 +136,14 @@ export class AddUserComponent {
       return this.error = data.error
 
     this.populateTableWithAllUsers()
+  }
+
+  changeFormToShow(formToShow: number) {
+    this.formToShow = formToShow
+  }
+
+  getFormToShow() {
+    return this.formsAvailable[this.formToShow]
   }
 
   getCookie(name: string) {

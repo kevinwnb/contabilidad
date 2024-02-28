@@ -78,3 +78,19 @@ button.button-sm {
   width: 100%;
   padding: 7px;
 }
+
+table td {
+  vertical-align: middle;
+}
+
+button#addUser {
+  width: auto;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+
+  > i {
+    margin-right: 10px;
+    transform: scale(1.25);
+  }
+}
