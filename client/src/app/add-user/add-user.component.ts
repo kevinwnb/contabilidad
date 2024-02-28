@@ -38,6 +38,20 @@ export class AddUserComponent {
 
   userIdForDeletion = 0
 
+  userPrivilegesForm = {
+    user_id: 0,
+    privileges: {
+      manage_users: 0,
+      see_income_details: 0
+    },
+    setUserId: (userId: number) => {
+      this.userPrivilegesForm.user_id = userId
+    },
+    setPrivileges: async (event: Event) => {
+      //
+    }
+  }
+
   constructor(private el: ElementRef) {
     this.populateTableWithAllUsers()
   }

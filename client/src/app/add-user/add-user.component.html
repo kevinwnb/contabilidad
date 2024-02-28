@@ -71,6 +71,7 @@
       <th scope="col">Email</th>
       <th scope="col">Role</th>
       <th scope="col">Designation</th>
+      <!-- <th scope="col">Privilegios</th> -->
       <th scope="col">Password</th>
       <th scope="col">Eliminar</th>
     </tr>
@@ -82,6 +83,7 @@
       <td>{{user.email}}</td>
       <td>{{getRole(user.role_id)}}</td>
       <td>{{getDesignation(user.designation_id)}}</td>
+      <!-- <td><button data-bs-toggle="modal" data-bs-target="#modal" class="button-default button-sm" (click)="changeFormToShow(4); userPrivilegesForm.setUserId(user.id)"><i class="fa-solid fa-list-check"></i> Ver privilegios</button></td> -->
       <td><button data-bs-toggle="modal" data-bs-target="#modal" class="button-warning button-sm" (click)="changePasswordForm.setUserId(user.id); changeFormToShow(2)"><i class="fa-solid fa-key"></i> Cambiar contraseña</button></td>
       <td><button class="button-danger button-sm" data-bs-toggle="modal" data-bs-target="#modal" (click)="changeFormToShow(3); changeUserIdForDeletion(user.id)"><i class="fa-regular fa-trash-can"></i> Eliminar</button></td>
     </tr>
