@@ -32,7 +32,7 @@ app.use(cookieParser())
 //     });
 // })
 
-app.use("/", express.static(path.join(__dirname, "client", "dist", "client")))
+app.use("/", express.static(path.join(__dirname, "..", "client", "dist", "client")))
 
 // Account
 app.use("/api", accountRouter)
