@@ -24,6 +24,18 @@ export class TripsComponent {
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
+  monthAndYearToDisplay = (new Date()).getFullYear() + '-' + this.getCurrentMonthInNumber();
+  changeMonthAndYearToDisplay(event: Event) {
+    this.monthAndYearToDisplay = (event.target as HTMLInputElement).value
+    this.monthDisplayed = (new Date((event.target as HTMLInputElement).value)).getMonth() + 1
+    this.yearDisplayed = (new Date((event.target as HTMLInputElement).value)).getFullYear()
+    let dat = (new Date((event.target as HTMLInputElement).value))
+    this.weekday = new Date(dat.getFullYear(), dat.getMonth(), 1).getDay();
+    this.changeDays()
+    this.changeDaysBeforeCurrent()
+    this.changeDaysAfterCurrent()
+    this.populateEntries();
+  }
   currentMonth = this.monthNames[(new Date()).getMonth()];
   monthDisplayed = (new Date()).getMonth() + 1;
   yearDisplayed = (new Date()).getFullYear();
@@ -42,6 +54,18 @@ export class TripsComponent {
     this.populateEntries();
   }
 
+  changeDays(){
+    this.days = Array.from({ length: this.daysInMonthToDisplay() }, (_, i) => i + 1)
+  }
+
+  changeDaysBeforeCurrent() {
+    this.daysBeforeCurrent = Array.from({ length: this.weekday - 1 }, (_, i) => i + 1);
+  }
+
+  changeDaysAfterCurrent() {
+    this.daysAfterCurrent = Array(7 - this.weekday);
+  }
+
   changeSelectedDesignation(event: Event) {
     this.selectedDesignation = this.designations.indexOf(this.designations[parseInt((event.target as HTMLInputElement).value)])
     this.concept = "Cierre " + this.designations[this.selectedDesignation]
@@ -50,6 +74,10 @@ export class TripsComponent {
   daysInThisMonth() {
     var now = new Date();
     return (new Date(now.getFullYear(), now.getMonth() + 1, 0)).getDate();
+  }
+
+  daysInMonthToDisplay() {
+    return (new Date(this.yearDisplayed, this.monthDisplayed, 0)).getDate();
   }
 
   weekdayOfFirstDay() {
@@ -198,6 +226,14 @@ export class TripsComponent {
 
   filterByDesignation(designation: number) {
     this.designationFilter = designation;
+  }
+
+  getCurrentMonthInNumber() {
+    return ("0" + ((new Date()).getMonth() + 1)).slice(-2)
+  }
+
+  getMonthIn2DigitFormat(month: number) {
+    return ("0" + month).slice(-2)
   }
 
   getCookie(cname: string): string {

@@ -18,11 +18,17 @@ module.exports = {
 
         con.connect(function (err) {
             if (err)
-                return res.json({ success: false, error: "An error ocurred on our end, please try again later1"+err.message })
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later1" + err.message })
 
             con.query("SELECT * FROM entradas WHERE MONTH(fecha) = ?", req.params.month, function (err, result) {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later2" })
+
+                con.end(error => {
+                    if (error) return res.json({ success: false, error: "An error ocurred on our end, please try again later db" })
+
+                    console.log('con end')
+                })
 
                 return res.json({ success: true, entries: result })
             })
@@ -44,11 +50,17 @@ module.exports = {
 
         con.connect(function (err) {
             if (err)
-                return res.json({ success: false, error: "An error ocurred on our end, please try again later1"+err.message })
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later1" + err.message })
 
             con.query("SELECT id, concepto, fecha FROM entradas WHERE MONTH(fecha) = ?", req.params.month, function (err, result) {
                 if (err)
                     return res.json({ success: false, error: "An error ocurred on our end, please try again later2" })
+
+                con.end(error => {
+                    if (error) return res.json({ success: false, error: "An error ocurred on our end, please try again later db" })
+
+                    console.log('con end')
+                })
 
                 return res.json({ success: true, entries: result })
             })
