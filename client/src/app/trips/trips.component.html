@@ -111,7 +111,7 @@
 
 <div *ngIf="role < 2" class="details">
   <div>
-    <h2>Total año {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+    <h2>Total mes {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
         style="font-weight: bold;"
         [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{calculateTotal(designationFilter)}}€</span>
     </h2>
