@@ -80,7 +80,8 @@
 </div>
 
 <div class="calendar">
-  <h2>{{monthAndYearToDisplay}}<input type="month" [value]="monthAndYearToDisplay" (change)="changeMonthAndYearToDisplay($event)" /></h2>
+  <h2>{{monthAndYearToDisplay}}<input type="month" [value]="monthAndYearToDisplay"
+      (change)="changeMonthAndYearToDisplay($event)" /></h2>
   <div class="filters" *ngIf="role < 3">
     <button [class.filter-active]="designationFilter == -1" (click)="filterByDesignation(-1)">Todo</button>
     <button [class.filter-active]="designationFilter == i"
@@ -105,6 +106,7 @@
     <div class="day" *ngFor="let day of daysAfterCurrent">
 
     </div>
+
   </div>
 </div>
 
