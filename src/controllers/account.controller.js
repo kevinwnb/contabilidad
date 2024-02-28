@@ -82,7 +82,7 @@ module.exports = {
                     if (err)
                         return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
 
-                    con.query("INSERT INTO users (first_name, last_name, email, password, role_id, designation_id) VALUES (?, ?, ?, ?, ?, ?)", [req.body.firstName, req.body.lastName, req.body.email, hash, req.body.role_id, req.body.designation_id], function (err, result) {
+                    con.query("INSERT INTO users (first_name, last_name, email, password, role_id, designation_id) VALUES (?, ?, ?, ?, ?, ?)", [req.body.first_name, req.body.last_name, req.body.email, hash, req.body.role_id, req.body.designation_id], function (err, result) {
                         if (err)
                             return res.json({ success: false, error: "An error ocurred on our end, please try again later" + err.message })
 
@@ -145,6 +145,32 @@ module.exports = {
 
                     return res.json({ success: true, error: "" })
                 })
+            })
+        })
+    },
+
+    deleteUser: (req, res) => {
+        if (!req.body.user_id)
+            return res.json({ success: false, error: "No se han proporcionado todos los campos" })
+
+        var con = mysql.createConnection({
+            host: "localhost",
+            port: 3306,
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
+            multipleStatements: true
+        });
+        
+        con.connect(function (err) {
+            if (err)
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+                
+            con.query("DELETE FROM users WHERE id = ?", [req.body.user_id], function (err, result) {
+                if (err)
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                return res.json({ success: true, error: "" })
             })
         })
     }

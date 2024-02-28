@@ -36,6 +36,8 @@ export class AddUserComponent {
     }
   }
 
+  userIdForDeletion = 0
+
   constructor(private el: ElementRef) {
     this.populateTableWithAllUsers()
   }
@@ -165,6 +167,10 @@ export class AddUserComponent {
     if (!data.success)
       return this.error = data.error
 
+    this.el.nativeElement.querySelector('#modal button.btn-close').click()
+
+    this.formToShow = 0
+
     this.populateTableWithAllUsers()
   }
 
@@ -174,6 +180,10 @@ export class AddUserComponent {
 
   getFormToShow() {
     return this.formsAvailable[this.formToShow]
+  }
+
+  changeUserIdForDeletion(userId: number) {
+    this.userIdForDeletion = userId
   }
 
   getCookie(name: string) {
