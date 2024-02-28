@@ -35,7 +35,7 @@
           <div class="mb-3">
             <label for="role" class="form-label">Rol</label>
             <select id="role" (change)="changeRole($event)">
-              <option *ngFor="let rol of removeFirstOptionFromRolesArray(roles); index as i" [selected]="role == i" [value]="i">
+              <option *ngFor="let rol of removeFirstOptionFromRolesArray(roles); index as i" [selected]="role == i + 1" [value]="i + 1">
                 {{rol}}</option>
             </select>
           </div>

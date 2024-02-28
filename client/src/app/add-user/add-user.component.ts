@@ -77,7 +77,37 @@ export class AddUserComponent {
   }
 
   async addUser() {
-    console.log(this.name, this.lastName, this.email, this.password, this.role)
+
+    let response = await fetch('/api/add-user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.getCookie('token')
+      },
+      body: JSON.stringify({
+        first_name: this.name,
+        last_name: this.lastName,
+        email: this.email,
+        password: this.password,
+        role_id: this.role,
+        designation_id: this.selectedDesignation
+      })
+    })
+
+    let data = await response.json()
+
+    if (!data.success)
+      return this.registerUserFormError = data.error
+
+    this.el.nativeElement.querySelector('#modal button.btn-close').click()
+    this.name = ''
+    this.lastName = ''
+    this.email = ''
+    this.password = ''
+    this.role = 3
+    this.selectedDesignation = 0
+
+    this.populateTableWithAllUsers()
   }
 
   changeSelectedDesignation(event: Event) {
