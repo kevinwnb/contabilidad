@@ -9,9 +9,8 @@
         <div *ngFor="let des of removeGerenteFromDesignations(designations); index as i" class="mb-3 category-container"
           [class.d-none]="filterEntriesByDay(entries, i).length == 0 || role < 2 || role == 3">
           <h3>{{des}}</h3>
-          <p class="alert d-flex" [class.alert-danger]="entry.cantidad < 0" [class.alert-success]="entry.cantidad > 0"
-            *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
-              class="ms-auto">{{entry.cantidad}}€</b></p>
+          <p class="alert alert-info d-flex" *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
+              class="ms-auto"><i class="fa-solid fa-check" style="transform: scale(1.75);"></i></b></p>
         </div>
         <table *ngIf="role < 2 && filterEntriesByDay(entries, 5).length > 0" class="table">
           <thead>
@@ -94,7 +93,7 @@
     </div>
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
       (click)="setModalDate(day)">
-      <h4>{{day}}</h4><small *ngIf="role == 1 && designationFilter == -1" class="ms-2">{{getEntriesCount(day)}}
+      <h4>{{day}}</h4><small *ngIf="(role == 1 || role == 2) && designationFilter == -1" class="ms-2">{{getEntriesCount(day)}}
         entradas</small>
       <b *ngIf="role == 1 && designationFilter == -1" class="eod" [class.green]="getEntriesSum(day) > 0"
         [class.neutral]="getEntriesSum(day) == 0" [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
