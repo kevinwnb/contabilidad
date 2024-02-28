@@ -80,7 +80,7 @@
 </div>
 
 <div class="calendar">
-  <h2>{{monthAndYearToDisplay}}<input type="month" [value]="monthAndYearToDisplay"
+  <h2><span *ngIf="role == 3">{{monthAndYearToDisplay}}</span><input *ngIf="role < 3" type="month" [value]="monthAndYearToDisplay"
       (change)="changeMonthAndYearToDisplay($event)" /></h2>
   <div class="filters" *ngIf="role < 3">
     <button [class.filter-active]="designationFilter == -1" (click)="filterByDesignation(-1)">Todo</button>
