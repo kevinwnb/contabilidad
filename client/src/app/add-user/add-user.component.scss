@@ -45,6 +45,27 @@ button.button-warning {
 
   > i {
     margin-right: 10px;
+    transform: scale(1.25);
+  }
+}
+
+button.button-danger {
+  padding: 10px;
+  color: black;
+  font-weight: bold;
+  background-color: rgb(226, 84, 84);
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &:disabled {
+    background-color: gray;
+    color: rgba(255,255,255,0.5);
+  }
+
+  > i {
+    margin-right: 10px;
+    transform: scale(1.25);
   }
 }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-add-user',
@@ -9,6 +9,7 @@ export class AddUserComponent {
 
   error = ""
   registerUserFormError = ''
+  changeUserPasswordFormError = ''
 
   users: any[] = []
 
@@ -24,12 +25,15 @@ export class AddUserComponent {
   changePasswordForm = {
     user_id: 0,
     password: '',
-    setUserId: (event: Event) => {
-      this.changePasswordForm.user_id = parseInt((event.target as HTMLInputElement).value)
+    changePassword: (event: Event) => {
+      this.changePasswordForm.password = (event.target as HTMLInputElement).value
+    },
+    setUserId: (userId: number) => {
+      this.changePasswordForm.user_id = userId
     }
   }
 
-  constructor() {
+  constructor(private el: ElementRef) {
     this.populateTableWithAllUsers()
   }
 
@@ -98,8 +102,28 @@ export class AddUserComponent {
         'Authorization': 'Bearer ' + this.getCookie('token')
       },
       body: JSON.stringify({
-        user_id: userId,
-        password: this.password
+        user_id: this.changePasswordForm.user_id,
+        password: this.changePasswordForm.password
+      })
+    })
+
+    let data = await response.json()
+
+    if (!data.success)
+      return this.changeUserPasswordFormError = data.error
+
+    this.el.nativeElement.querySelector('#modal button.btn-close').click()
+  }
+
+  async deleteUser(userId: number) {
+    let response = await fetch('/api/delete-user', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + this.getCookie('token')
+      },
+      body: JSON.stringify({
+        user_id: userId
       })
     })
 
@@ -108,7 +132,7 @@ export class AddUserComponent {
     if (!data.success)
       return this.error = data.error
 
-    this.error = ''
+    this.populateTableWithAllUsers()
   }
 
   getCookie(name: string) {

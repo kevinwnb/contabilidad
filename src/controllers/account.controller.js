@@ -134,5 +134,36 @@ module.exports = {
                 return res.json({ success: true, users: result })
             })
         })
+    },
+
+    changeUserPassword: (req, res) => {
+        if (!req.body.user_id || !req.body.password)
+            return res.json({ success: false, error: "No se han proporcionado todos los campos" })
+
+        bcrypt.hash(req.body.password, 10, function (err, hash) {
+            if (err)
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+            var con = mysql.createConnection({
+                host: "localhost",
+                port: 3306,
+                user: process.env.DATABASE_USER,
+                password: process.env.DATABASE_PASSWORD,
+                database: process.env.DATABASE,
+                multipleStatements: true
+            });
+
+            con.connect(function (err) {
+                if (err)
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                con.query("UPDATE users SET password = ? WHERE id = ?", [hash, req.body.user_id], function (err, result) {
+                    if (err)
+                        return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                    return res.json({ success: true, error: "" })
+                })
+            })
+        })
     }
 }
