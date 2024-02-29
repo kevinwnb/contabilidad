@@ -40,15 +40,15 @@
             <input type="text" id="name" readonly [value]="getCookie('user_name')">
           </div>
           <div class="mb-3">
-            <label for="opening" class="form-label">Apertura contado € (formato: X.XXX,XX)</label>
+            <label for="opening" class="form-label">Apertura <small>(formato: X.XXX,XX)</small></label>
             <input type="text" [value]="opening" (change)="changeOpening($event)" id="amount">
           </div>
           <div class="mb-3">
-            <label for="closing" class="form-label">Cierre contado €</label>
+            <label for="closing" class="form-label">Cierre <small>(formato: X.XXX,XX)</small></label>
             <input type="text" [value]="closing" (change)="changeClosing($event)" id="amount">
           </div>
           <div class="mb-3">
-            <label for="mastercard" class="form-label">Tarjeta €</label>
+            <label for="mastercard" class="form-label">Tarjeta <small>(formato: X.XXX,XX)</small></label>
             <input type="text" [value]="mastercard" (change)="changeMastercard($event)" id="amount">
           </div>
           <div class="mb-3">
