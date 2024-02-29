@@ -19,8 +19,9 @@ export class TripsComponent {
   modalDate: Date = new Date();
   days = Array.from({ length: this.daysInThisMonth() }, (_, i) => i + 1);
   weekday = this.weekdayOfFirstDay();
-  daysBeforeCurrent = Array.from({ length: this.weekday - 1 }, (_, i) => i + 1);
-  daysAfterCurrent = Array(7 - (this.weekday || 1) - this.getDaysToSubtract());
+  daysBeforeCurrent = Array.from({ length: (this.weekday || 7) - 1 }, (_, i) => i + 1);
+  //Array(7 - (this.weekday || 1) - this.getDaysToSubtract() + this.getDaysToAdd())
+  daysAfterCurrent = Array(this.days.length + this.daysBeforeCurrent.length < 36 ? 35 - this.days.length - this.daysBeforeCurrent.length : 42 - this.days.length - this.daysBeforeCurrent.length);
   monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
     "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
   ];
@@ -67,8 +68,12 @@ export class TripsComponent {
     return this.days.length == 30 ? 1 : this.days.length == 31 ? 2 : 0
   }
 
+  getDaysToAdd() {
+    return this.days.length == 28 ? 1 : 0
+  }
+
   changeDaysAfterCurrent() {
-    this.daysAfterCurrent = Array(7 - (this.weekday || 1) - this.getDaysToSubtract())
+    this.daysAfterCurrent = Array(this.days.length + this.daysBeforeCurrent.length < 36 ? 35 - this.days.length - this.daysBeforeCurrent.length : 42 - this.days.length - this.daysBeforeCurrent.length)
   }
 
   changeSelectedDesignation(event: Event) {

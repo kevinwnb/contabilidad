@@ -82,7 +82,7 @@ CREATE TABLE `entradas` (
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=68 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2),(63,'Cierre',400,'2024-02-25',1,200,321,3),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3);
+INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2),(63,'Cierre',400,'2024-02-25',1,200,321,3),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3),(68,'Cierre Cafetería Miranda',2,'2024-03-30',2,2,2,2);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -148,7 +148,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (2,'a@a.aa','$2b$10$Bmp6MxdPkifc0sywe9k1vuLw3K4drEYxxjHewMQF/AJMq5rTla8Yi','a','a',3,2),(3,'kevinwnb@gmail.com','$2b$10$nY.qTqU8mSLKq.uoSDTYnOm1gyovLNZF7Ce4OEu20OcJAsLs6m/H6','Kevin','Wegener',1,5),(4,'milagros@cafekevin.es','$2b$10$224JToR.hjrM/PsTRMfCVubNIcjhSagm20O47VaNslB2qSuZrNe0q','Milagros','Paoli',3,1);
+INSERT INTO `users` VALUES (2,'a@a.aa','$2b$10$WiGtFcQVGjIxeMSMFk2dZe.xfhyjRaB69CACNkxzBIG0oOFPnhdda','a','a',3,2),(3,'kevinwnb@gmail.com','$2b$10$nY.qTqU8mSLKq.uoSDTYnOm1gyovLNZF7Ce4OEu20OcJAsLs6m/H6','Kevin','Wegener',1,5),(4,'milagros@cafekevin.es','$2b$10$5N022Pt1zYPNIXvFh3VRMeFqRhCiinqMSU/nPV4YdfRkf3UTX4oFm','Milagros','Paoli',2,1);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-28  3:04:09
+-- Dump completed on 2024-02-29  0:19:13
