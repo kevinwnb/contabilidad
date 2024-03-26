@@ -131,9 +131,9 @@ export class TripsComponent {
       body: JSON.stringify({
         operator: this.getCookie('user_id'),
         concept: this.concept,
-        opening: this.opening,
-        closing: this.closing,
-        mastercard: this.mastercard,
+        opening: this.intercambiarPuntoComa(this.opening),
+        closing: this.intercambiarPuntoComa(this.closing),
+        mastercard: this.intercambiarPuntoComa(this.mastercard),
         date: this.modalDate.toISOString(),
         designation: this.selectedDesignation
       })
@@ -229,6 +229,10 @@ export class TripsComponent {
     return designations.filter((designation, i) => i != 5);
   }
 
+  intercambiarPuntoComa(input: any) {
+    return input.replace(/[,.]/g, function (x: any) { return x == "," ? "." : ""; });
+  }
+
   validateCurrencyFormat(input: string) {
     let regex = /^\d\.\d\d\d,\d\d$|^\d\d\d,\d\d$|^\d\d,\d\d$|^\d,\d\d$|^\d\.\d\d\d$|^\d\d\d$|^\d\d$|^\d$/i;
     return regex.test(input);
@@ -244,6 +248,10 @@ export class TripsComponent {
 
   getMonthIn2DigitFormat(month: number) {
     return ("0" + month).slice(-2)
+  }
+
+  toFixed2Digits(number: number) {
+    return Math.round((number + Number.EPSILON) * 100) / 100
   }
 
   getCookie(cname: string): string {

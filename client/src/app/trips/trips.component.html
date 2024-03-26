@@ -28,7 +28,7 @@
               <td>{{entry.apertura_contado}}€</td>
               <td>{{entry.cierre_contado}}€</td>
               <td>{{entry.tarjeta}}€</td>
-              <td>{{(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
+              <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
             </tr>
           </tbody>
         </table>
@@ -113,7 +113,7 @@
   <div>
     <h2>Total mes {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
         style="font-weight: bold;"
-        [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{calculateTotal(designationFilter)}}€</span>
+        [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotal(designationFilter))}}€</span>
     </h2>
   </div>
 </div>
