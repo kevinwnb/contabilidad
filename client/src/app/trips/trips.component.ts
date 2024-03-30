@@ -52,6 +52,8 @@ export class TripsComponent {
 
   designationFilter = -1;
 
+  entryDeletionError: string;
+
   constructor() {
     this.populateEntries();
   }
@@ -252,6 +254,24 @@ export class TripsComponent {
 
   toFixed2Digits(number: number) {
     return Math.round((number + Number.EPSILON) * 100) / 100
+  }
+
+  async confirmDeletion(id: number) {
+    if(confirm("¿Confirmar la eliminación?") === true) {
+      let response = await fetch('/api/entry/' + id, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + this.getCookie('token')
+        }
+      })
+
+      let data = await response.json()
+
+      if (!data.success)
+        return this.entryDeletionError = data.error
+
+      this.populateEntries()
+    }
   }
 
   getCookie(cname: string): string {

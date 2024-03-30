@@ -12,6 +12,7 @@
           <p class="alert alert-info d-flex" *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
               class="ms-auto"><i class="fa-solid fa-check" style="transform: scale(1.75);"></i></b></p>
         </div>
+        <p class="alert alert-danger" *ngIf="entryDeletionError">{{entryDeletionError}}</p>
         <table *ngIf="role < 2 && filterEntriesByDay(entries, 5).length > 0" class="table">
           <thead>
             <tr>
@@ -20,6 +21,7 @@
               <th>Cierre</th>
               <th>Tarjeta</th>
               <th>Diferencia</th>
+              <th *ngIf="role === 1"></th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +31,7 @@
               <td>{{entry.cierre_contado}}€</td>
               <td>{{entry.tarjeta}}€</td>
               <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
+              <td *ngIf="role === 1"><button (click)="confirmDeletion(entry.id)" class="button-danger x-close"><i class="fa-solid fa-xmark"></i></button></td>
             </tr>
           </tbody>
         </table>

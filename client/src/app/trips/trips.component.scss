@@ -20,25 +20,25 @@ div.calendar {
         background-color: gray;
       }
 
-      > b {
+      >b {
         display: flex;
         margin: 0 auto;
         justify-content: center;
       }
 
-      > b.green {
+      >b.green {
         color: limegreen;
       }
 
-      > b.red {
+      >b.red {
         color: red;
       }
 
-      > b.neutral {
+      >b.neutral {
         color: gray;
       }
 
-      > h4 {
+      >h4 {
         color: black;
         background-color: silver;
         display: inline-flex;
@@ -63,7 +63,8 @@ div.calendar {
   }
 }
 
-.modal input, .modal select {
+.modal input,
+.modal select {
   display: block;
   width: 100%;
   max-width: 200px;
@@ -84,7 +85,20 @@ button.button-success {
 
   &:disabled {
     background-color: gray;
-    color: rgba(255,255,255,0.5);
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+button.button-danger {
+  color: white;
+  background-color: red;
+  width: 100%;
+
+  &.x-close {
+    padding: 5px;
+    aspect-ratio: 1/1;
+    display: flex;
+    width: initial;
   }
 }
 
@@ -113,6 +127,10 @@ div.loading div.spinner {
   height: 120px;
   -webkit-animation: spin 1s linear infinite;
   animation: spin 1s linear infinite;
+}
+
+table tr td {
+  vertical-align: middle;
 }
 
 @-webkit-keyframes spin {

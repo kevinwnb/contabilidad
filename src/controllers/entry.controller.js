@@ -95,4 +95,34 @@ module.exports = {
             })
         })
     },
+
+    delete: (req, res) => {
+        if (!req.params.id)
+            return res.json({ success: false, error: "The deletion id was not supplied" })
+
+        var con = mysql.createConnection({
+            host: "localhost",
+            port: 3306,
+            user: process.env.DATABASE_USER,
+            password: process.env.DATABASE_PASSWORD,
+            database: process.env.DATABASE,
+            multipleStatements: true
+        })
+
+        con.connect(function (err) {
+            if (err)
+                return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+
+            con.query("DELETE FROM entradas WHERE id = ?", req.params.id, function (err, result) {
+                if (err)
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                if (result.affectedRows === 0)
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later" })
+
+                return res.json({ success: true, error: "" })
+            })
+        })
+    }
 }
