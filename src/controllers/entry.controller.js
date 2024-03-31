@@ -84,14 +84,22 @@ module.exports = {
                 return res.json({ success: false, error: "An error ocurred on our end, please try again later1" })
 
 
-            con.query("INSERT INTO entradas (concepto, cierre_contado, apertura_contado, tarjeta, fecha, designation_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.concept, parseFloat(req.body.closing), parseFloat(req.body.opening), parseFloat(req.body.mastercard), req.body.date.split("T")[0], parseInt(req.body.designation), parseInt(req.body.operator)], function (err, result) {
+            con.query("SELECT * FROM entradas WHERE fecha = ? AND designation_id = ?", [req.body.date.split("T")[0], parseInt(req.body.designation)], function (err, result) {
                 if (err)
-                    return res.json({ success: false, error: "An error ocurred on our end, please try again later2" + err.message })
+                    return res.json({ success: false, error: "An error ocurred on our end, please try again later2" })
+console.log(result)
+                if (result.length > 0)
+                    return res.json({ success: false, error: "Ya se ha enviado el cierre para el negocio seleccionado" })
 
-                if (result.affectedRows === 0)
-                    return res.json({ success: false, error: "An error ocurred on our end, please try again later3" })
+                con.query("INSERT INTO entradas (concepto, cierre_contado, apertura_contado, tarjeta, fecha, designation_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.concept, parseFloat(req.body.closing), parseFloat(req.body.opening), parseFloat(req.body.mastercard), req.body.date.split("T")[0], parseInt(req.body.designation), parseInt(req.body.operator)], function (err, result) {
+                    if (err)
+                        return res.json({ success: false, error: "An error ocurred on our end, please try again later2" + err.message })
 
-                return res.json({ success: true, error: "" })
+                    if (result.affectedRows === 0)
+                        return res.json({ success: false, error: "An error ocurred on our end, please try again later3" })
+
+                    return res.json({ success: true, error: "" })
+                })
             })
         })
     },
