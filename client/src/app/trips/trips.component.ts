@@ -188,7 +188,10 @@ export class TripsComponent {
   getEntrySum(day: number) {
     let entry = this.entries.find(entry => new Date(entry.fecha).getDate() == day && entry.designation_id == this.designationFilter);
     if (entry)
-      return parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta)
+      {
+        let sum = parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta)
+        return Math.round((sum + Number.EPSILON) * 100) / 100
+      }
     else
       return 0
   }
@@ -286,6 +289,10 @@ export class TripsComponent {
     this.modalDate = new Date();
     this.selectedDesignation = 0;
     this.concept = 'Cierre ' + this.designations[this.selectedDesignation];
+  }
+
+  roundTo2Decimals(number: number) {
+    return Math.round((number + Number.EPSILON) * 100) / 100
   }
 
   getCookie(cname: string): string {
