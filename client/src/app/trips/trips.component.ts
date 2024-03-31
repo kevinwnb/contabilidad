@@ -214,6 +214,26 @@ export class TripsComponent {
     return total;
   }
 
+  calculateTotalMastercard(designationFilter: number) {
+    let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
+    let total = 0;
+    entries.forEach(entry => {
+      total += entry.tarjeta;
+    })
+
+    return total;
+  }
+
+  calculateTotalCash(designationFilter: number) {
+    let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
+    let total = 0;
+    entries.forEach(entry => {
+      total += entry.cierre_contado - entry.apertura_contado;
+    })
+
+    return total;
+  }
+
   calculateDifference(opening: number, closing: number, mastercard: number) {
     return closing - opening + mastercard;
   }

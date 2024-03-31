@@ -118,5 +118,15 @@
         style="font-weight: bold;"
         [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotal(designationFilter))}}€</span>
     </h2>
+
+    <h2>Total mes (cash) {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+        style="font-weight: bold;"
+        [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))}}€</span>
+    </h2>
+
+    <h2>Total mes (tarjeta) {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+        style="font-weight: bold;"
+        [style.color]="calculateTotalMastercard(designationFilter) < 0 ? 'red' : calculateTotalMastercard(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalMastercard(designationFilter))}}€</span>
+    </h2>
   </div>
 </div>
