@@ -13,7 +13,7 @@ export class LoginComponent {
   errorMsg: string = ''
 
   loginForm = this.formBuilder.group({
-    email: 'a@a.aa',
+    email: 'kevinwnb@gmail.com',
     password: 'Kevin1703'
   })
 
