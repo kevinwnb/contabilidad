@@ -274,6 +274,20 @@ export class TripsComponent {
     }
   }
 
+  clearErrors() {
+    this.error = '';
+    this.entryDeletionError = '';
+  }
+
+  clearFields() {
+    this.opening = '';
+    this.closing = '';
+    this.mastercard = '';
+    this.modalDate = new Date();
+    this.selectedDesignation = 0;
+    this.concept = 'Cierre ' + this.designations[this.selectedDesignation];
+  }
+
   getCookie(cname: string): string {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);

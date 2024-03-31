@@ -95,7 +95,7 @@
 
     </div>
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
-      (click)="setModalDate(day)">
+      (click)="clearErrors(); clearFields(); setModalDate(day)">
       <h4>{{day}}</h4><small *ngIf="(role == 1 || role == 2) && designationFilter == -1" class="ms-2">{{getEntriesCount(day)}}
         entradas</small>
       <b *ngIf="role == 1 && designationFilter == -1" class="eod" [class.green]="getEntriesSum(day) > 0"

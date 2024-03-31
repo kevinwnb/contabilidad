@@ -72,7 +72,7 @@ DROP TABLE IF EXISTS `entradas`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entradas` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `concepto` varchar(45) DEFAULT NULL,
+  `concepto` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `cierre_contado` double DEFAULT NULL,
   `fecha` date DEFAULT NULL,
   `designation_id` int DEFAULT NULL,
@@ -82,7 +82,7 @@ CREATE TABLE `entradas` (
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +91,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2),(63,'Cierre',400,'2024-02-25',1,200,321,3),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3),(68,'Cierre Cafetería Miranda',2,'2024-03-30',2,2,2,2);
+INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2),(63,'Cierre',400,'2024-02-25',1,200,321,3),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3),(68,'Cierre Cafetería Miranda',2,'2024-03-30',2,2,2,2),(69,'Cierre Cafetería Kevin',150,'2024-03-30',1,200,22,3),(70,'Cierre Pastelería Miranda Carlos III',800,'2024-03-30',4,700,100,3),(71,'Cierre Cafetería Kevin',1,'2024-03-29',1,1,1,3),(72,'Cierre Cafetería Kevin',1,'2024-03-29',1,1,1,3),(73,'Cierre Cafetería Kevin',1,'2024-03-29',1,700,1,3),(80,'Cierre Cafetería Kevin',1,'2024-03-29',1,700.1,100,3),(81,'Cierre Cafetería Kevin',1000.2,'2024-03-29',1,700.1,100,3),(82,'Cierre Cafetería Kevin',1234.3,'2024-03-29',1,600.2,100,3),(89,'Cierre Cafetería Kevin',1,'2024-03-28',1,1,1,3);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +161,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-02-29  0:19:13
+-- Dump completed on 2024-03-31  1:12:25
