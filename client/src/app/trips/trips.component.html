@@ -29,7 +29,7 @@
             <tr *ngFor="let entry of filterEntriesByDay(entries, 5)">
               <td>{{entry.concepto}}</td>
               <td>{{entry.apertura_contado}}€</td>
-              <td>{{entry.pagos}}€</td>
+              <td>{{entry.pagos || 0}}€</td>
               <td>{{entry.cierre_contado}}€</td>
               <td>{{entry.tarjeta}}€</td>
               <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
@@ -135,7 +135,7 @@
         [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))}}€</span>
     </h2>
 
-    <h2>Total mes (tarjeta) {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+    <h2>Total mes tarjeta {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
         style="font-weight: bold;"
         [style.color]="calculateTotalMastercard(designationFilter) < 0 ? 'red' : calculateTotalMastercard(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalMastercard(designationFilter))}}€</span>
     </h2>
