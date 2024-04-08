@@ -67,7 +67,7 @@ module.exports = {
         })
     },
     create: (req, res) => {
-        if (!req.body.operator || !req.body.closing || !req.body.opening || !req.body.mastercard || !req.body.date || !req.body.concept || !req.body.designation)
+        if (!req.body.operator || !req.body.closing || !req.body.opening || !req.body.payments || !req.body.mastercard || !req.body.date || !req.body.concept || !req.body.designation)
             return res.json({ success: false, error: "Por favor proporcione todos los campos requeridos" })
 
         var con = mysql.createConnection({
@@ -91,7 +91,7 @@ console.log(result)
                 if (result.length > 0)
                     return res.json({ success: false, error: "Ya se ha enviado el cierre para el negocio seleccionado" })
                 
-                con.query("INSERT INTO entradas (concepto, cierre_contado, apertura_contado, tarjeta, fecha, designation_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?)", [req.body.concept, (Math.round((parseFloat(req.body.closing) + Number.EPSILON) * 100) / 100), (Math.round((parseFloat(req.body.opening) + Number.EPSILON) * 100) / 100), (Math.round((parseFloat(req.body.mastercard) + Number.EPSILON) * 100) / 100), req.body.date.split("T")[0], parseInt(req.body.designation), parseInt(req.body.operator)], function (err, result) {
+                con.query("INSERT INTO entradas (concepto, cierre_contado, apertura_contado, pagos, tarjeta, fecha, designation_id, user_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", [req.body.concept, (Math.round((parseFloat(req.body.closing) + Number.EPSILON) * 100) / 100), (Math.round((parseFloat(req.body.opening) + Number.EPSILON) * 100) / 100), (Math.round((parseFloat(req.body.payments) + Number.EPSILON) * 100) / 100), (Math.round((parseFloat(req.body.mastercard) + Number.EPSILON) * 100) / 100), req.body.date.split("T")[0], parseInt(req.body.designation), parseInt(req.body.operator)], function (err, result) {
                     if (err)
                         return res.json({ success: false, error: "An error ocurred on our end, please try again later2" + err.message })
 

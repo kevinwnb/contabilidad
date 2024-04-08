@@ -47,6 +47,7 @@ export class TripsComponent {
   concept = "Cierre " + this.designations[this.selectedDesignation];
   amount = "";
   opening = "";
+  payments = "";
   closing = "";
   mastercard = "";
 
@@ -56,6 +57,10 @@ export class TripsComponent {
 
   constructor() {
     this.populateEntries();
+  }
+
+  changePayments(event: Event) {
+    this.payments = (event.target as HTMLInputElement).value
   }
 
   changeDays() {
@@ -134,6 +139,7 @@ export class TripsComponent {
         operator: this.getCookie('user_id'),
         concept: this.concept,
         opening: this.intercambiarPuntoComa(this.opening),
+        payments: this.intercambiarPuntoComa(this.payments),
         closing: this.intercambiarPuntoComa(this.closing),
         mastercard: this.intercambiarPuntoComa(this.mastercard),
         date: this.modalDate.toISOString(),
@@ -204,7 +210,7 @@ export class TripsComponent {
       return false
   }
 
-  calculateTotal(designationFilter: number) {
+  calculateTotalNet(designationFilter: number) {
     let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
     let total = 0;
     entries.forEach(entry => {
@@ -234,8 +240,22 @@ export class TripsComponent {
     return total;
   }
 
+  calculateTotalGross(designationFilter: number) {
+    let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
+    let total = 0;
+    entries.forEach(entry => {
+      total += entry.cierre_contado - entry.apertura_contado + entry.pagos + entry.tarjeta;
+    })
+
+    return total;
+  }
+
   calculateDifference(opening: number, closing: number, mastercard: number) {
     return closing - opening + mastercard;
+  }
+
+  calculateTotalDay(opening: number, closing: number, mastercard: number, payments: number) {
+    return closing - opening + mastercard + payments;
   }
 
   changeOpening(event: Event) {

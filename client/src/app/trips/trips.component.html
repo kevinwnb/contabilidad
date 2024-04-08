@@ -1,5 +1,5 @@
 <div #modal id="modal" class="modal fade">
-  <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+  <div style="width: 100%; max-width: 800px;" class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title">{{modalDate | date: 'dd/MM/yyyy'}}</h5>
@@ -18,6 +18,7 @@
             <tr>
               <th>Concepto</th>
               <th>Apertura</th>
+              <th>Pagos</th>
               <th>Cierre</th>
               <th>Tarjeta</th>
               <th>Diferencia</th>
@@ -28,6 +29,7 @@
             <tr *ngFor="let entry of filterEntriesByDay(entries, 5)">
               <td>{{entry.concepto}}</td>
               <td>{{entry.apertura_contado}}€</td>
+              <td>{{entry.pagos}}€</td>
               <td>{{entry.cierre_contado}}€</td>
               <td>{{entry.tarjeta}}€</td>
               <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
@@ -44,15 +46,19 @@
           </div>
           <div class="mb-3">
             <label for="opening" class="form-label">Apertura <small>(formato: X.XXX,XX)</small></label>
-            <input type="text" [value]="opening" (change)="changeOpening($event)" id="amount">
+            <input type="text" [value]="opening" (change)="changeOpening($event)" id="opening">
+          </div>
+          <div class="mb-3">
+            <label for="payments" class="form-label">Pagos <small>(formato: X.XXX,XX)</small></label>
+            <input type="text" [value]="payments" (change)="changePayments($event)" id="payments">
           </div>
           <div class="mb-3">
             <label for="closing" class="form-label">Cierre <small>(formato: X.XXX,XX)</small></label>
-            <input type="text" [value]="closing" (change)="changeClosing($event)" id="amount">
+            <input type="text" [value]="closing" (change)="changeClosing($event)" id="closing">
           </div>
           <div class="mb-3">
             <label for="mastercard" class="form-label">Tarjeta <small>(formato: X.XXX,XX)</small></label>
-            <input type="text" [value]="mastercard" (change)="changeMastercard($event)" id="amount">
+            <input type="text" [value]="mastercard" (change)="changeMastercard($event)" id="mastercard">
           </div>
           <div class="mb-3">
             <label for="concept" class="form-label">Concepto</label>
@@ -114,12 +120,17 @@
 
 <div *ngIf="role < 2" class="details">
   <div>
-    <h2>Total mes {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+    <h2>Total mes BRUTO {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
         style="font-weight: bold;"
-        [style.color]="calculateTotal(designationFilter) < 0 ? 'red' : calculateTotal(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotal(designationFilter))}}€</span>
+        [style.color]="calculateTotalGross(designationFilter) < 0 ? 'red' : calculateTotalGross(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalGross(designationFilter))}}€</span>
     </h2>
 
-    <h2>Total mes (cash) {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+    <h2>Total mes NETO {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
+        style="font-weight: bold;"
+        [style.color]="calculateTotalNet(designationFilter) < 0 ? 'red' : calculateTotalNet(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalNet(designationFilter))}}€</span>
+    </h2>
+
+    <h2>Total mes cash {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
         style="font-weight: bold;"
         [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))}}€</span>
     </h2>
