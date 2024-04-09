@@ -55,8 +55,15 @@ export class TripsComponent {
 
   entryDeletionError: string;
 
-  constructor() {
+  constructor(private elementRef: ElementRef) {
     this.populateEntries();
+  }
+
+  ngAfterViewInit() {
+    this.elementRef.nativeElement.querySelector('#modal').addEventListener('hidden.bs.modal', () => {
+      this.clearErrors();
+      this.clearFields();
+    })
   }
 
   changePayments(event: Event) {
@@ -325,6 +332,7 @@ export class TripsComponent {
   clearFields() {
     this.opening = '';
     this.closing = '';
+    this.payments = '';
     this.mastercard = '';
     this.modalDate = new Date();
     this.selectedDesignation = 0;

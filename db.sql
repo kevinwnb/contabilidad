@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `contabilidad` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `contabilidad`;
 -- MySQL dump 10.13  Distrib 8.0.36, for Win64 (x86_64)
 --
 -- Host: localhost    Database: contabilidad
@@ -79,10 +81,11 @@ CREATE TABLE `entradas` (
   `apertura_contado` double DEFAULT NULL,
   `tarjeta` double DEFAULT NULL,
   `user_id` int DEFAULT NULL,
+  `pagos` double DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `user_id_idx` (`user_id`),
   CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=120 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +94,7 @@ CREATE TABLE `entradas` (
 
 LOCK TABLES `entradas` WRITE;
 /*!40000 ALTER TABLE `entradas` DISABLE KEYS */;
-INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2),(63,'Cierre',400,'2024-02-25',1,200,321,3),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3),(68,'Cierre Cafetería Miranda',2,'2024-03-30',2,2,2,2),(69,'Cierre Cafetería Kevin',150,'2024-03-30',1,200,22,3),(70,'Cierre Pastelería Miranda Carlos III',800,'2024-03-30',4,700,100,3),(71,'Cierre Cafetería Kevin',1,'2024-03-29',1,1,1,3),(72,'Cierre Cafetería Kevin',1,'2024-03-29',1,1,1,3),(73,'Cierre Cafetería Kevin',1,'2024-03-29',1,700,1,3),(80,'Cierre Cafetería Kevin',1,'2024-03-29',1,700.1,100,3),(81,'Cierre Cafetería Kevin',1000.2,'2024-03-29',1,700.1,100,3),(82,'Cierre Cafetería Kevin',1234.3,'2024-03-29',1,600.2,100,3),(89,'Cierre Cafetería Kevin',1,'2024-03-28',1,1,1,3);
+INSERT INTO `entradas` VALUES (62,'Cierre de caja',200,'2024-02-25',2,100,123,2,NULL),(63,'Cierre',400,'2024-02-25',1,200,321,3,NULL),(64,'Cierre Pastelería Miranda Mezquita',200,'2024-02-25',3,100,100,3,NULL),(65,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,2,NULL),(66,'Cierre Cafetería Kevin',1,'2024-02-23',1,1,1,3,NULL),(67,'Cierre Cafetería Miranda',1,'2024-02-23',2,1,1,3,NULL),(95,'Cierre Pastelería Miranda Carlos III',1195.68,'2024-03-29',4,700,321.15,3,NULL),(96,'Cierre Pastelería Miranda Carlos III',602.7,'2024-03-30',4,700,152.75,3,NULL),(97,'Cierre Pastelería Miranda Carlos III',731.38,'2024-03-28',4,462.02,282.68,3,NULL),(98,'Cierre Pastelería Miranda Carlos III',426.02,'2024-03-27',4,908.77,123.25,3,NULL),(99,'Cierre Pastelería Miranda Carlos III',208.77,'2024-03-26',4,223.73,135.8,3,NULL),(100,'Cierre Pastelería Miranda Carlos III',1292.65,'2024-03-24',4,590.71,331.05,3,NULL),(101,'Cierre Pastelería Miranda Carlos III',590.71,'2024-03-23',4,438.24,184.55,3,NULL),(102,'Cierre Pastelería Miranda Carlos III',438.24,'2024-03-22',4,409.65,200.95,3,NULL),(103,'Cierre Pastelería Miranda Carlos III',279.65,'2024-03-21',4,541.9,208.5,3,NULL),(104,'Cierre Pastelería Miranda Carlos III',256.36,'2024-03-20',4,365.83,88.1,3,NULL),(105,'Cierre Pastelería Miranda Carlos III',223.34,'2024-03-01',4,528.39,129.37,3,NULL),(106,'Cierre Pastelería Miranda Carlos III',303.62,'2024-03-02',4,223.34,169.25,3,NULL),(107,'Cierre Pastelería Miranda Carlos III',1118.64,'2024-03-03',4,303.62,300.4,3,NULL),(108,'Cierre Pastelería Miranda Carlos III',266.56,'2024-03-05',4,1000,108.92,3,NULL),(109,'Cierre Pastelería Miranda Carlos III',403.83,'2024-03-06',4,366.56,154.61,3,NULL),(110,'Cierre Pastelería Miranda Carlos III',369.15,'2024-03-07',4,403.83,148.2,3,NULL),(111,'Cierre Pastelería Miranda Carlos III',395.05,'2024-03-08',4,519.15,207.95,3,NULL),(112,'Cierre Pastelería Miranda Carlos III',302.63,'2024-03-09',4,395.05,148,3,NULL),(113,'Cierre Pastelería Miranda Carlos III',1470.91,'2024-03-10',4,302.63,378.94,3,NULL),(114,'Cierre Pastelería Miranda Carlos III',298.5,'2024-03-12',4,1040,111,3,NULL),(115,'Cierre Pastelería Miranda Carlos III',271.83,'2024-03-13',4,298.5,144.22,3,NULL),(116,'Cierre Pastelería Miranda Carlos III',320.81,'2024-03-14',4,821.83,79.4,3,NULL),(117,'Cierre Pastelería Miranda Carlos III',221.91,'2024-03-15',4,370.81,181.65,3,NULL),(118,'Cierre Pastelería Miranda Carlos III',265.83,'2024-03-19',4,701.95,186.55,3,NULL);
 /*!40000 ALTER TABLE `entradas` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -161,4 +164,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-03-31  1:12:25
+-- Dump completed on 2024-04-09 15:10:08
