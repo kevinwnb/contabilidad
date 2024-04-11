@@ -49,16 +49,16 @@
             <input type="text" [value]="opening" (change)="changeOpening($event)" id="opening">
           </div>
           <div class="mb-3">
-            <label for="payments" class="form-label">Pagos <small>(formato: X.XXX,XX)</small></label>
-            <input type="text" [value]="payments" (change)="changePayments($event)" id="payments">
-          </div>
-          <div class="mb-3">
             <label for="closing" class="form-label">Cierre <small>(formato: X.XXX,XX)</small></label>
             <input type="text" [value]="closing" (change)="changeClosing($event)" id="closing">
           </div>
           <div class="mb-3">
             <label for="mastercard" class="form-label">Tarjeta <small>(formato: X.XXX,XX)</small></label>
             <input type="text" [value]="mastercard" (change)="changeMastercard($event)" id="mastercard">
+          </div>
+          <div class="mb-3">
+            <label for="payments" class="form-label">Pagos <small>(formato: X.XXX,XX)</small></label>
+            <input type="text" [value]="payments" (change)="changePayments($event)" id="payments">
           </div>
           <div class="mb-3">
             <label for="concept" class="form-label">Concepto</label>
