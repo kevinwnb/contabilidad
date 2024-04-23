@@ -26,6 +26,9 @@ import { TripsComponent } from './trips/trips.component';
 import { CreateAccountComponent } from './create-account/create-account.component';
 import { SettingsComponent } from './settings/settings.component';
 import { AddUserComponent } from './add-user/add-user.component';
+import { registerLocaleData } from "@angular/common";
+import localeEs from '@angular/common/locales/es';
+registerLocaleData(localeEs, 'es');
 
 @NgModule({
   declarations: [

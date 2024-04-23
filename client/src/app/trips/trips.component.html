@@ -9,8 +9,10 @@
         <div *ngFor="let des of removeGerenteFromDesignations(designations); index as i" class="mb-3 category-container"
           [class.d-none]="filterEntriesByDay(entries, i).length == 0 || role < 2 || role == 3">
           <h3>{{des}}</h3>
-          <p class="alert alert-info d-flex" *ngFor="let entry of filterEntriesByDay(entries, i)"><span>{{entry.concepto}}</span> <b
-              class="ms-auto"><i class="fa-solid fa-check" style="transform: scale(1.75);"></i></b></p>
+          <p class="alert alert-info d-flex" *ngFor="let entry of filterEntriesByDay(entries, i)">
+            <span>{{entry.concepto}}</span> <b class="ms-auto"><i class="fa-solid fa-check"
+                style="transform: scale(1.75);"></i></b>
+          </p>
         </div>
         <p class="alert alert-danger" *ngIf="entryDeletionError">{{entryDeletionError}}</p>
         <table *ngIf="role < 2 && filterEntriesByDay(entries, 5).length > 0" class="table">
@@ -28,12 +30,19 @@
           <tbody>
             <tr *ngFor="let entry of filterEntriesByDay(entries, 5)">
               <td>{{entry.concepto}}</td>
-              <td>{{entry.apertura_contado}}€</td>
-              <td>{{entry.pagos || 0}}€</td>
-              <td>{{entry.cierre_contado}}€</td>
-              <td>{{entry.tarjeta}}€</td>
-              <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))}}€</td>
-              <td *ngIf="role === 1"><button (click)="confirmDeletion(entry.id)" class="button-danger x-close"><i class="fa-solid fa-xmark"></i></button></td>
+              <td>{{entry.apertura_contado
+                | number : '1.2-2':'es-ES'}}€</td>
+              <td>{{entry.pagos || 0
+                | number : '1.2-2':'es-ES'}}€</td>
+              <td>{{entry.cierre_contado
+                | number : '1.2-2':'es-ES'}}€</td>
+              <td>{{entry.tarjeta
+                | number : '1.2-2':'es-ES'}}€</td>
+              <td>{{toFixed2Digits(calculateDifference(entry.apertura_contado, entry.cierre_contado, entry.tarjeta))
+                | number : '1.2-2':'es-ES'}}€
+              </td>
+              <td *ngIf="role === 1"><button (click)="confirmDeletion(entry.id)" class="button-danger x-close"><i
+                    class="fa-solid fa-xmark"></i></button></td>
             </tr>
           </tbody>
         </table>
@@ -88,13 +97,15 @@
 </div>
 
 <div class="calendar">
-  <h2><span *ngIf="role == 3">{{monthAndYearToDisplay}}</span><input *ngIf="role < 3" type="month" [value]="monthAndYearToDisplay"
-      (change)="changeMonthAndYearToDisplay($event)" /></h2>
+  <h2><span *ngIf="role == 3">{{monthAndYearToDisplay}}</span><input *ngIf="role < 3" type="month"
+      [value]="monthAndYearToDisplay" (change)="changeMonthAndYearToDisplay($event)" /></h2>
   <div class="filters" *ngIf="role < 3">
     <button [class.filter-active]="designationFilter == -1" (click)="filterByDesignation(-1)">Todo</button>
     <button [class.filter-active]="designationFilter == i"
       *ngFor="let des of removeGerenteFromDesignations(designations); index as i"
       (click)="filterByDesignation(i)">{{des}}</button>
+      <button class="ms-auto bruto" [class.active]="bruto === true" (click)="changeBruto($event)"><i class="fa-solid fa-square-check" [class.d-none]="bruto === false"></i><i class="fa-regular fa-square" [class.d-none]="bruto === true"></i> BRUTO</button>
+      <button class="neto" [class.active]="neto === true" (click)="changeNeto($event)"><i class="fa-solid fa-square-check" [class.d-none]="neto === false"></i><i class="fa-regular fa-square" [class.d-none]="neto === true"></i> NETO</button>
   </div>
   <div class="calendar-container">
     <div class="day" *ngFor="let day of daysBeforeCurrent">
@@ -102,12 +113,15 @@
     </div>
     <div class="day current" *ngFor="let day of days" data-bs-toggle="modal" data-bs-target="#modal" [id]="day"
       (click)="setModalDate(day)">
-      <h4>{{day}}</h4><small *ngIf="(role == 1 || role == 2) && designationFilter == -1" class="ms-2">{{getEntriesCount(day)}}
+      <h4>{{day}}</h4><small *ngIf="(role == 1 || role == 2) && designationFilter == -1"
+        class="ms-2">{{getEntriesCount(day)}}
         entradas</small>
       <b *ngIf="role == 1 && designationFilter == -1" class="eod" [class.green]="getEntriesSum(day) > 0"
-        [class.neutral]="getEntriesSum(day) == 0" [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)}}€</b>
+        [class.neutral]="getEntriesSum(day) == 0" [class.red]="getEntriesSum(day) < 0">{{getEntriesSum(day)
+        | number : '1.2-2':'es-ES'}}€</b>
       <b *ngIf="role == 1 && designationFilter != -1" class="eod" [class.green]="getEntrySum(day) > 0"
-        [class.neutral]="getEntrySum(day) == 0" [class.red]="getEntrySum(day) < 0">{{getEntrySum(day)}}€</b>
+        [class.neutral]="getEntrySum(day) == 0" [class.red]="getEntrySum(day) < 0">{{getEntrySum(day)
+        | number : '1.2-2':'es-ES'}}€</b>
       <b *ngIf="role == 3 && getEntryCheck(day)" class="text-primary">Cierre enviado</b>
       <b *ngIf="role == 3 && !getEntryCheck(day)" class="text-success">Enviar cierre</b>
     </div>
@@ -119,25 +133,31 @@
 </div>
 
 <div *ngIf="role < 2" class="details">
-  <div>
-    <h2>Total mes BRUTO {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
-        style="font-weight: bold;"
-        [style.color]="calculateTotalGross(designationFilter) < 0 ? 'red' : calculateTotalGross(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalGross(designationFilter))}}€</span>
-    </h2>
+  <div style="background-color: lightgray; padding: 10px;">
+    <h2>Resumen del mes {{designationFilter == -1 ? '(todos los negocios)' : "(" + designations[designationFilter] +
+      ")"}}</h2>
+    <h4>Efectivo + tarjeta + facturas: <span style="font-weight: bold;"
+        [style.color]="calculateTotalGross(designationFilter) < 0 ? 'red' : calculateTotalGross(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalGross(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
 
-    <h2>Total mes NETO {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
-        style="font-weight: bold;"
-        [style.color]="calculateTotalNet(designationFilter) < 0 ? 'red' : calculateTotalNet(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalNet(designationFilter))}}€</span>
-    </h2>
+    <h4>Efectivo + tarjeta: <span style="font-weight: bold;"
+        [style.color]="calculateTotalNet(designationFilter) < 0 ? 'red' : calculateTotalNet(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalNet(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
 
-    <h2>Total mes cash {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
-        style="font-weight: bold;"
-        [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))}}€</span>
-    </h2>
+    <h4>Efectivo: <span style="font-weight: bold;"
+        [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
 
-    <h2>Total mes tarjeta {{designationFilter == -1 ? '(todo)' : "(" + designations[designationFilter] + ")"}}: <span
-        style="font-weight: bold;"
-        [style.color]="calculateTotalMastercard(designationFilter) < 0 ? 'red' : calculateTotalMastercard(designationFilter) > 0 ? 'limegreen' : 'gray'">{{toFixed2Digits(calculateTotalMastercard(designationFilter))}}€</span>
-    </h2>
+    <h4>Tarjeta: <span style="font-weight: bold;"
+        [style.color]="calculateTotalMastercard(designationFilter) < 0 ? 'red' : calculateTotalMastercard(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalMastercard(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
+    <h4>Facturas: <span style="font-weight: bold;"
+        [style.color]="calculateTotalInvoices(designationFilter) < 0 ? 'red' : calculateTotalInvoices(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalInvoices(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
   </div>
 </div>

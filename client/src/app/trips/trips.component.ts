@@ -55,8 +55,27 @@ export class TripsComponent {
 
   entryDeletionError: string;
 
+  bruto = false
+  neto = true
+
   constructor(private elementRef: ElementRef) {
     this.populateEntries();
+  }
+
+  changeBruto(event: Event) {
+    if (this.bruto === true)
+      return
+
+    this.neto = !this.neto
+    this.bruto = !this.bruto
+  }
+
+  changeNeto(event: Event) {
+    if (this.neto === true)
+      return
+
+    this.neto = !this.neto
+    this.bruto = !this.bruto
   }
 
   ngAfterViewInit() {
@@ -147,8 +166,8 @@ export class TripsComponent {
         concept: this.concept,
         opening: this.intercambiarPuntoComa(this.opening),
         payments: this.intercambiarPuntoComa(this.payments),
-        closing: this.intercambiarPuntoComa(this.closing),
-        mastercard: this.intercambiarPuntoComa(this.mastercard),
+        closing: this.closing.split(';').length > 1 ? this.sumarArrayDeNumeros(this.closing) : this.intercambiarPuntoComa(this.closing).toString(),
+        mastercard: this.mastercard.split(';').length > 1 ? this.sumarArrayDeNumeros(this.mastercard) : this.intercambiarPuntoComa(this.mastercard).toString(),
         date: this.modalDate.toISOString(),
         designation: this.selectedDesignation
       })
@@ -176,7 +195,12 @@ export class TripsComponent {
       return this.error = data.error
 
     this.entries = data.entries
-    console.log(this.entries)
+  }
+
+  sumarArrayDeNumeros(array: string) {
+    const numeros = array.split(';').map(e => this.intercambiarPuntoComa(e)).map(Number);
+    const suma = numeros.reduce((acumulador, numero) => acumulador + numero, 0);
+    return suma.toString();
   }
 
   filterEntriesByDay(entries: any[], designation: number) {
@@ -200,11 +224,10 @@ export class TripsComponent {
 
   getEntrySum(day: number) {
     let entry = this.entries.find(entry => new Date(entry.fecha).getDate() == day && entry.designation_id == this.designationFilter);
-    if (entry)
-      {
-        let sum = parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta)
-        return Math.round((sum + Number.EPSILON) * 100) / 100
-      }
+    if (entry) {
+      let sum = parseFloat(entry.cierre_contado) - parseFloat(entry.apertura_contado) + parseFloat(entry.tarjeta)
+      return Math.round((sum + Number.EPSILON) * 100) / 100
+    }
     else
       return 0
   }
@@ -257,6 +280,16 @@ export class TripsComponent {
     return total;
   }
 
+  calculateTotalInvoices(designationFilter: number) {
+    let entries = this.entries.filter(entry => entry.designation_id == designationFilter || designationFilter == -1);
+    let total = 0;
+    entries.forEach(entry => {
+      total += entry.pagos;
+    })
+
+    return total;
+  }
+
   calculateDifference(opening: number, closing: number, mastercard: number) {
     return closing - opening + mastercard;
   }
@@ -286,7 +319,7 @@ export class TripsComponent {
   }
 
   validateCurrencyFormat(input: string) {
-    let regex = /^\d\.\d\d\d,\d\d$|^\d\d\d,\d\d$|^\d\d,\d\d$|^\d,\d\d$|^\d\.\d\d\d$|^\d\d\d$|^\d\d$|^\d$/i;
+    let regex = /^\d\.\d\d\d,\d\d$|^\d\d\d,\d\d$|^\d\d,\d\d$|^\d,\d\d$|^\d\.\d\d\d$|^\d\d\d$|^\d\d$|^\d$|^\d;\d$|[\s\S]+/i;
     return regex.test(input);
   }
 
@@ -307,7 +340,7 @@ export class TripsComponent {
   }
 
   async confirmDeletion(id: number) {
-    if(confirm("¿Confirmar la eliminación?") === true) {
+    if (confirm("¿Confirmar la eliminación?") === true) {
       let response = await fetch('/api/entry/' + id, {
         method: 'DELETE',
         headers: {

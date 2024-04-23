@@ -133,6 +133,22 @@ table tr td {
   vertical-align: middle;
 }
 
+div.filters {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+button:is(.bruto, .neto) {
+  background-color: lightyellow;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  &.active {
+    background-color: lightblue;
+  }
+}
+
 @-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);

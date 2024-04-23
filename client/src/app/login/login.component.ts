@@ -12,6 +12,10 @@ export class LoginComponent {
 
   errorMsg: string = ''
 
+  formerCredentials = {
+    email: 'kevinwnb@gmail.com',
+    password: 'Kevin1703'
+  }
   loginForm = this.formBuilder.group({
     email: 'kevinwnb@gmail.com',
     password: 'Kevin1703'
