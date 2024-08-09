@@ -32,8 +32,6 @@ app.use(cookieParser())
 //     });
 // })
 
-app.use("/", express.static(path.join(__dirname, "..", "client", "dist", "client")))
-
 // Account
 app.use("/api", accountRouter)
 
@@ -43,8 +41,10 @@ app.use("/api/entry", auth, entryRouter)
 // Refuels
 app.use("/api/refuel", auth, refuelRouter)
 
-app.use("*", (req, res) => res.redirect("/"))
+app.use(express.static(path.join(__dirname, "..", "client", "dist", "client")))
+
+app.all("*", (req, res) => res.sendFile(path.resolve(__dirname, "..", "client", "dist", "client", "index.html")))
 
 app.listen(process.env.PORT || 80, () => {
-    console.log("Server started on port 80")
+    console.log("Server started on port " + process.env.PORT || 80)
 })
