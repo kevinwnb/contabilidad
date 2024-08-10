@@ -53,7 +53,7 @@ export class LoginComponent {
       this.setCookie("token", data.token, 1)
       this.errorMsg = ""
       this.isLoading = false
-      this.router.navigate(['/trips'])
+      this.router.navigate(['trips'])
     }
   }
 }

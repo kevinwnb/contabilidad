@@ -45,6 +45,11 @@ app.use(express.static(path.join(__dirname, "..", "client", "dist", "client")))
 
 app.all("*", (req, res) => res.sendFile(path.resolve(__dirname, "..", "client", "dist", "client", "index.html")))
 
-app.listen(process.env.PORT || 80, () => {
+const server = require("https").createServer({
+    key: fs.readFileSync(path.resolve(__dirname, "ssl_private_key.key")),
+    cert: fs.readFileSync(path.resolve(__dirname, "ssl_certificate.cer"))
+} ,app)
+
+server.listen(process.env.PORT || 80, () => {
     console.log("Server started on port " + process.env.PORT || 80)
 })
