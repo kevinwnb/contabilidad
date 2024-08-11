@@ -155,9 +155,5 @@
         [style.color]="calculateTotalInvoices(designationFilter) < 0 ? 'red' : calculateTotalInvoices(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalInvoices(designationFilter))
         | number : '1.2-2':'es-ES'}}€</span>
     </h4>
-    <h4>Diferencia (total ventas - facturas): <span style="font-weight: bold;"
-        [style.color]="calculateTotalInvoices(designationFilter) < 0 ? 'red' : calculateTotalInvoices(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalInvoices(designationFilter))
-        | number : '1.2-2':'es-ES'}}€</span>
-    </h4>
   </div>
 </div>
