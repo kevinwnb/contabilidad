@@ -136,26 +136,26 @@
   <div style="background-color: lightgray; padding: 10px;">
     <h2>Resumen del mes {{designationFilter == -1 ? '(todos los negocios)' : "(" + designations[designationFilter] +
       ")"}}</h2>
-    <h4>Efectivo + tarjeta + facturas: <span style="font-weight: bold;"
-        [style.color]="calculateTotalGross(designationFilter) < 0 ? 'red' : calculateTotalGross(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalGross(designationFilter))
-        | number : '1.2-2':'es-ES'}}€</span>
-    </h4>
 
-    <h4>Efectivo + tarjeta: <span style="font-weight: bold;"
+    <h4>Total ventas (efectivo + tarjeta): <span style="font-weight: bold;"
         [style.color]="calculateTotalNet(designationFilter) < 0 ? 'red' : calculateTotalNet(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalNet(designationFilter))
         | number : '1.2-2':'es-ES'}}€</span>
     </h4>
 
-    <h4>Efectivo: <span style="font-weight: bold;"
+    <h4>Ventas efectivo: <span style="font-weight: bold;"
         [style.color]="calculateTotalCash(designationFilter) < 0 ? 'red' : calculateTotalCash(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalCash(designationFilter))
         | number : '1.2-2':'es-ES'}}€</span>
     </h4>
 
-    <h4>Tarjeta: <span style="font-weight: bold;"
+    <h4>Ventas tarjeta: <span style="font-weight: bold;"
         [style.color]="calculateTotalMastercard(designationFilter) < 0 ? 'red' : calculateTotalMastercard(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalMastercard(designationFilter))
         | number : '1.2-2':'es-ES'}}€</span>
     </h4>
     <h4>Facturas: <span style="font-weight: bold;"
+        [style.color]="calculateTotalInvoices(designationFilter) < 0 ? 'red' : calculateTotalInvoices(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalInvoices(designationFilter))
+        | number : '1.2-2':'es-ES'}}€</span>
+    </h4>
+    <h4>Diferencia (total ventas - facturas): <span style="font-weight: bold;"
         [style.color]="calculateTotalInvoices(designationFilter) < 0 ? 'red' : calculateTotalInvoices(designationFilter) > 0 ? 'green' : 'gray'">{{toFixed2Digits(calculateTotalInvoices(designationFilter))
         | number : '1.2-2':'es-ES'}}€</span>
     </h4>
