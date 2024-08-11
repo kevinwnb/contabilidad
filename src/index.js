@@ -11,7 +11,6 @@ const entryRouter = require("./routes/entry.router")
 const fs = require("fs")
 const refuelRouter = require("./routes/refuel.router")
 
-
 app.use(express.json())
 app.use(cookieParser())
 
@@ -52,5 +51,5 @@ const server = require("https").createServer({
 } ,app)
 
 server.listen(process.env.PORT || 444, () => {
-    console.log("Server started on port " + process.env.PORT || 80)
+    console.log("Server started on port " + process.env.PORT || 444)
 })
